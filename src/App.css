@@ -1,0 +1,2307 @@
+:root {
+  --wings-navy: #173b68;
+  --wings-navy-dark: #102b4f;
+  --wings-navy-deep: #0a203c;
+
+  --wings-red: #d63a40;
+  --wings-red-dark: #bd3037;
+
+  --wings-light-blue: #d0f2ff;
+  --wings-light-blue-hover: #e3f8ff;
+
+  --wings-white: #ffffff;
+
+  --landing-height:
+    clamp(
+      720px,
+      42vw,
+      880px
+    );
+
+  --landing-content-width: 1540px;
+
+  --carousel-transition: 1500ms;
+}
+
+/* =========================================================
+   PAGE / WIX AUTO HEIGHT FOUNDATION
+========================================================= */
+
+.landing-page {
+  display: block;
+
+  width: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  height: auto;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  background: transparent;
+}
+
+.wings-landing {
+  position: relative;
+  isolation: isolate;
+
+  display: block;
+
+  width: 100%;
+
+  height: var(--landing-height);
+
+  min-width: 0;
+  min-height: 720px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background: #49667e;
+}
+
+/* =========================================================
+   BACKGROUND CAROUSEL
+========================================================= */
+
+.background-carousel {
+  position: absolute;
+  z-index: 0;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      #213f5e,
+      #6f8799
+    );
+}
+
+.background-slide {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  transform: scale(1.015);
+
+  transition:
+    opacity
+      var(--carousel-transition)
+      ease-in-out,
+    transform
+      8s
+      ease-out;
+
+  will-change:
+    opacity,
+    transform;
+}
+
+.background-slide-active {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  object-fit: cover;
+  object-position: center center;
+}
+
+.background-blue-wash {
+  position: absolute;
+  z-index: 3;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        13,
+        40,
+        68,
+        0.42
+      )
+        0%,
+      rgba(
+        32,
+        63,
+        86,
+        0.45
+      )
+        43%,
+      rgba(
+        90,
+        116,
+        133,
+        0.54
+      )
+        100%
+    ),
+    rgba(
+      24,
+      54,
+      78,
+      0.18
+    );
+}
+
+.background-top-shade {
+  position: absolute;
+  z-index: 4;
+
+  top: 0;
+  right: 0;
+  left: 0;
+
+  height: 26%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        4,
+        23,
+        44,
+        0.46
+      ),
+      rgba(
+        4,
+        23,
+        44,
+        0
+      )
+    );
+}
+
+.background-edge-vignette {
+  position: absolute;
+  z-index: 5;
+
+  inset: 0;
+
+  box-shadow:
+    inset 0 0 130px
+      rgba(
+        8,
+        25,
+        43,
+        0.2
+      ),
+    inset 0 -80px 120px
+      rgba(
+        24,
+        46,
+        62,
+        0.12
+      );
+}
+
+/* =========================================================
+   LANDING LAYOUT
+========================================================= */
+
+.landing-layout {
+  position: relative;
+  z-index: 10;
+
+  width:
+    min(
+      100%,
+      var(
+        --landing-content-width
+      )
+    );
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  padding:
+    clamp(
+      38px,
+      3.2vw,
+      66px
+    )
+    clamp(
+      36px,
+      4vw,
+      74px
+    )
+    clamp(
+      40px,
+      3.2vw,
+      64px
+    );
+}
+
+/* =========================================================
+   TOP ACTION BUTTONS
+========================================================= */
+
+.top-actions {
+  position: absolute;
+  z-index: 30;
+
+  top:
+    clamp(
+      52px,
+      5.2vw,
+      98px
+    );
+
+  right:
+    clamp(
+      48px,
+      5vw,
+      94px
+    );
+
+  left:
+    clamp(
+      48px,
+      5vw,
+      94px
+    );
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  pointer-events: none;
+}
+
+.top-action-left,
+.top-action-right {
+  pointer-events: auto;
+}
+
+/* =========================================================
+   WINGS STORE
+========================================================= */
+
+.store-button {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 184px;
+  height: 66px;
+
+  color: #ffffff;
+
+  filter:
+    drop-shadow(
+      0 6px 5px
+        rgba(
+          0,
+          0,
+          0,
+          0.34
+        )
+    );
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.store-button:hover {
+  transform:
+    translateY(-2px);
+
+  filter:
+    drop-shadow(
+      0 8px 7px
+        rgba(
+          0,
+          0,
+          0,
+          0.38
+        )
+    );
+}
+
+.store-button-face {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 128px;
+  height: 60px;
+
+  gap: 2px;
+
+  border:
+    2px solid
+    #111b27;
+
+  border-radius: 19px;
+
+  color: #ffffff;
+
+  background: #cf3e43;
+
+  box-shadow:
+    inset
+      0
+      1px
+      0
+      rgba(
+        255,
+        255,
+        255,
+        0.1
+      );
+}
+
+.store-button-face span {
+  font-size: 10px;
+  font-weight: 900;
+
+  line-height: 1.05;
+
+  letter-spacing:
+    0.17em;
+}
+
+.store-wing {
+  position: absolute;
+
+  top: 9px;
+
+  width: 49px;
+  height: 35px;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.store-wing-left {
+  left: 0;
+}
+
+.store-wing-right {
+  right: 0;
+
+  transform: scaleX(-1);
+}
+
+.store-wing i {
+  position: absolute;
+
+  left: 0;
+
+  display: block;
+
+  height: 8px;
+
+  border-radius:
+    100% 0 0 100%;
+
+  background: #cf3e43;
+
+  transform:
+    skewX(-25deg);
+}
+
+.store-wing i:nth-child(1) {
+  top: 2px;
+
+  width: 48px;
+}
+
+.store-wing i:nth-child(2) {
+  top: 11px;
+  left: 9px;
+
+  width: 38px;
+}
+
+.store-wing i:nth-child(3) {
+  top: 20px;
+  left: 18px;
+
+  width: 27px;
+}
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+.newsletter-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 158px;
+  height: 61px;
+
+  gap: 3px;
+
+  border:
+    1px solid
+    rgba(
+      8,
+      27,
+      47,
+      0.55
+    );
+
+  border-radius: 15px;
+
+  color: #ffffff;
+
+  background: #254a78;
+
+  box-shadow:
+    0 5px 7px
+      rgba(
+        0,
+        0,
+        0,
+        0.32
+      );
+
+  transition:
+    background-color
+      160ms ease,
+    transform
+      160ms ease;
+}
+
+.newsletter-button:hover {
+  background: #2d588e;
+
+  transform:
+    translateY(-2px);
+}
+
+.newsletter-button span {
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.19em;
+}
+
+/* =========================================================
+   CENTER CONTENT
+========================================================= */
+
+.center-content {
+  position: absolute;
+  z-index: 20;
+
+  top: 49%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width:
+    min(
+      660px,
+      48vw
+    );
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  text-align: center;
+}
+
+/* =========================================================
+   MAIN LOGO
+========================================================= */
+
+.main-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width:
+    clamp(
+      180px,
+      11vw,
+      230px
+    );
+
+  min-height:
+    clamp(
+      180px,
+      11vw,
+      230px
+    );
+}
+
+.main-logo {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 4px 3px
+        rgba(
+          0,
+          0,
+          0,
+          0.18
+        )
+    );
+}
+
+.main-logo-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 200px;
+  height: 200px;
+
+  border:
+    8px solid
+    #f2f2ed;
+
+  border-radius: 50%;
+
+  color: #17375f;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 3px 5px
+      rgba(
+        0,
+        0,
+        0,
+        0.3
+      );
+}
+
+.main-logo-fallback span {
+  font-size: 20px;
+  font-weight: 900;
+
+  letter-spacing:
+    0.12em;
+}
+
+.main-logo-fallback strong {
+  color: #17375f;
+
+  font-size: 88px;
+  font-weight: 900;
+
+  line-height: 0.85;
+}
+
+/* =========================================================
+   TAGLINE
+========================================================= */
+
+.main-tagline {
+  margin:
+    clamp(
+      22px,
+      2vw,
+      35px
+    )
+    0
+    0;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      17px,
+      1.35vw,
+      28px
+    );
+
+  font-weight: 900;
+
+  line-height: 1.2;
+
+  letter-spacing:
+    0.16em;
+
+  text-shadow:
+    0 1px 3px
+      rgba(
+        0,
+        0,
+        0,
+        0.26
+      );
+}
+
+/* =========================================================
+   CENTER DIVIDER
+========================================================= */
+
+.center-divider {
+  width:
+    clamp(
+      145px,
+      9.3vw,
+      180px
+    );
+
+  height: 2px;
+
+  margin:
+    clamp(
+      30px,
+      2.6vw,
+      46px
+    )
+    0
+    clamp(
+      30px,
+      2.2vw,
+      41px
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.8
+    );
+}
+
+/* =========================================================
+   ICE RENTALS
+========================================================= */
+
+.ice-rentals-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width:
+    clamp(
+      220px,
+      13.5vw,
+      275px
+    );
+
+  min-height:
+    clamp(
+      58px,
+      3.6vw,
+      70px
+    );
+
+  padding:
+    16px 28px;
+
+  border-radius: 12px;
+
+  color: #173961;
+
+  background: #d1f3ff;
+
+  box-shadow:
+    0 5px 8px
+      rgba(
+        0,
+        0,
+        0,
+        0.26
+      );
+
+  font-size:
+    clamp(
+      16px,
+      1vw,
+      21px
+    );
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.19em;
+
+  transition:
+    transform
+      160ms ease,
+    background-color
+      160ms ease;
+}
+
+.ice-rentals-button:hover {
+  background: #e2f9ff;
+
+  transform:
+    translateY(-2px);
+}
+
+/* =========================================================
+   SOCIALS
+========================================================= */
+
+.social-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top:
+    clamp(
+      35px,
+      2.6vw,
+      51px
+    );
+}
+
+.social-section p {
+  margin: 0 0 17px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      10px,
+      0.68vw,
+      14px
+    );
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.13em;
+}
+
+.social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  overflow: hidden;
+
+  transition:
+    transform
+      160ms ease,
+    opacity
+      160ms ease;
+}
+
+.social-button:hover {
+  transform:
+    translateY(-2px);
+
+  opacity: 0.9;
+}
+
+.social-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.social-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 11px;
+
+  color: #ffffff;
+
+  background: #17365c;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.social-button-instagram
+  .social-fallback {
+  background:
+    linear-gradient(
+      140deg,
+      #f9ce34,
+      #ee2a7b,
+      #6228d7
+    );
+}
+
+.social-button-facebook
+  .social-fallback {
+  border-radius: 50%;
+
+  background: #2f70dd;
+
+  font-size: 28px;
+}
+
+/* =========================================================
+   LIVEBARN
+========================================================= */
+
+.livebarn-link {
+  display: block;
+
+  width:
+    clamp(
+      475px,
+      35vw,
+      690px
+    );
+
+  max-width: 100%;
+
+  margin-top:
+    clamp(
+      50px,
+      4vw,
+      76px
+    );
+
+  transition:
+    transform
+      160ms ease;
+}
+
+.livebarn-link:hover {
+  transform:
+    translateY(-2px);
+}
+
+.livebarn-banner {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  box-shadow:
+    0 5px 11px
+      rgba(
+        0,
+        0,
+        0,
+        0.27
+      );
+}
+
+.livebarn-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  min-height: 83px;
+
+  padding: 18px 27px;
+
+  color: #ffffff;
+
+  background: #081930;
+
+  box-shadow:
+    0 5px 11px
+      rgba(
+        0,
+        0,
+        0,
+        0.27
+      );
+}
+
+.livebarn-fallback strong {
+  font-size: 35px;
+}
+
+.livebarn-fallback span {
+  color: #56c6eb;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  letter-spacing:
+    0.04em;
+}
+
+/* =========================================================
+   PROMOTIONAL CARD POSITION
+========================================================= */
+
+.featured-column {
+  position: absolute;
+  z-index: 25;
+
+  top:
+    clamp(
+      160px,
+      14vw,
+      216px
+    );
+
+  right:
+    clamp(
+      34px,
+      5vw,
+      92px
+    );
+
+  width:
+    clamp(
+      205px,
+      11.5vw,
+      235px
+    );
+}
+
+/* =========================================================
+   PROMOTIONAL CARD EMBED WRAPPER
+========================================================= */
+
+.promo-page {
+  width: 100%;
+
+  height: auto;
+  min-height: 0;
+
+  container-type: inline-size;
+  container-name: promo;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+}
+
+/* =========================================================
+   PROMOTIONAL CARD
+========================================================= */
+
+.promo-card {
+  width: 100%;
+  max-width: 290px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border:
+    clamp(
+      0.75px,
+      0.35cqi,
+      1px
+    )
+    solid
+    rgba(
+      8,
+      42,
+      74,
+      0.35
+    );
+
+  border-radius:
+    clamp(
+      8px,
+      3.5cqi,
+      12px
+    );
+
+  box-shadow:
+    0
+      clamp(
+        5px,
+        2.5cqi,
+        8px
+      )
+      clamp(
+        15px,
+        7cqi,
+        24px
+      )
+      rgba(
+        0,
+        24,
+        47,
+        0.26
+      ),
+    0
+      clamp(
+        1px,
+        0.7cqi,
+        2px
+      )
+      clamp(
+        4px,
+        2cqi,
+        6px
+      )
+      rgba(
+        0,
+        24,
+        47,
+        0.16
+      );
+
+  animation:
+    promo-card-enter
+      750ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      both;
+
+  transition:
+    transform
+      220ms ease,
+    box-shadow
+      220ms ease;
+}
+
+.promo-card:hover {
+  transform:
+    translateY(
+      clamp(
+        -3px,
+        -1cqi,
+        -2px
+      )
+    );
+
+  box-shadow:
+    0
+      clamp(
+        8px,
+        3cqi,
+        12px
+      )
+      clamp(
+        18px,
+        8cqi,
+        28px
+      )
+      rgba(
+        0,
+        24,
+        47,
+        0.3
+      ),
+    0
+      clamp(
+        2px,
+        1cqi,
+        4px
+      )
+      clamp(
+        6px,
+        3cqi,
+        10px
+      )
+      rgba(
+        0,
+        24,
+        47,
+        0.18
+      );
+}
+
+@keyframes promo-card-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(80px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+/* =========================================================
+   PROMO TOP BAR
+========================================================= */
+
+.promo-topbar {
+  height:
+    clamp(
+      28px,
+      12cqi,
+      38px
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap:
+    clamp(
+      6px,
+      3cqi,
+      10px
+    );
+
+  padding:
+    0
+    clamp(
+      9px,
+      4cqi,
+      13px
+    );
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      110deg,
+      #062e52 0%,
+      #0a416c 100%
+    );
+}
+
+.promo-logo {
+  display: block;
+
+  height:
+    clamp(
+      18px,
+      7.5cqi,
+      24px
+    );
+
+  width: auto;
+
+  max-width: 45%;
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+}
+
+.promo-logo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  flex: 0 0 auto;
+
+  border:
+    2px solid
+    #ffffff;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.promo-topbar-label {
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  text-align: center;
+
+  transform:
+    translateX(-15px);
+
+  font-size:
+    clamp(
+      9px,
+      3.9cqi,
+      12px
+    );
+
+  font-weight: 800;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PROMO BODY
+========================================================= */
+
+.promo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding:
+    clamp(
+      10px,
+      4.8cqi,
+      15px
+    )
+    clamp(
+      9px,
+      4.2cqi,
+      13px
+    )
+    clamp(
+      9px,
+      4.4cqi,
+      14px
+    );
+}
+
+.promo-program {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.promo-divider {
+  height: 2px;
+
+  margin:
+    clamp(
+      12px,
+      5cqi,
+      16px
+    )
+    0;
+
+  border-radius: 1px;
+
+  background:
+    rgba(
+      7,
+      52,
+      92,
+      0.5
+    );
+}
+
+.promo-subdivider {
+  height: 1.5px;
+
+  margin:
+    clamp(
+      6px,
+      3cqi,
+      10px
+    )
+    0;
+
+  border-radius: 1px;
+
+  background:
+    rgba(
+      7,
+      52,
+      92,
+      0.35
+    );
+}
+
+.promo-program-alt
+  .promo-button {
+  background: #073b65;
+}
+
+.promo-program-alt
+  .promo-button:focus-visible {
+  outline-color:
+    rgba(
+      7,
+      59,
+      101,
+      0.35
+    );
+}
+
+.promo-program-alt
+  .promo-button-red {
+  background: #d61f3e;
+}
+
+.promo-program-alt
+  .promo-button-red:focus-visible {
+  outline-color:
+    rgba(
+      214,
+      31,
+      62,
+      0.35
+    );
+}
+
+/* =========================================================
+   PROMO HEADINGS
+========================================================= */
+
+.promo-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom:
+    clamp(
+      7px,
+      3.8cqi,
+      12px
+    );
+
+  text-align: center;
+
+  font-family:
+    "Arial Narrow",
+    "Roboto Condensed",
+    Impact,
+    sans-serif;
+
+  font-size:
+    clamp(
+      15.5px,
+      7.5cqi,
+      22px
+    );
+
+  font-weight: 900;
+  font-style: italic;
+
+  line-height: 1.08;
+
+  letter-spacing:
+    clamp(
+      -0.3px,
+      -0.1cqi,
+      -0.15px
+    );
+
+  text-transform: uppercase;
+}
+
+.promo-heading span {
+  display: block;
+}
+
+.promo-heading-blue {
+  color: #07345c;
+}
+
+.promo-heading-red {
+  color: #e31837;
+}
+
+.promo-heading-amp {
+  margin:
+    0.05em 0;
+
+  color: #07345c;
+
+  font-size: 0.6em;
+  font-weight: 700;
+}
+
+/* =========================================================
+   PROMO BUTTONS
+========================================================= */
+
+.promo-button {
+  width: 80%;
+
+  margin: 0 auto;
+
+  min-height:
+    clamp(
+      31px,
+      12.5cqi,
+      38px
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(
+      7px,
+      3cqi,
+      10px
+    )
+    clamp(
+      10px,
+      5cqi,
+      16px
+    );
+
+  border:
+    1px solid
+    rgba(
+      0,
+      0,
+      0,
+      0.15
+    );
+
+  border-radius:
+    clamp(
+      4px,
+      1.8cqi,
+      5px
+    );
+
+  background: #d61f3e;
+
+  box-shadow:
+    0
+      clamp(
+        2px,
+        1cqi,
+        3px
+      )
+      clamp(
+        5px,
+        3cqi,
+        8px
+      )
+      rgba(
+        0,
+        44,
+        70,
+        0.2
+      );
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size:
+    clamp(
+      8px,
+      3.6cqi,
+      11px
+    );
+
+  font-weight: 900;
+
+  letter-spacing:
+    clamp(
+      0.8px,
+      0.55cqi,
+      1.7px
+    );
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    transform
+      160ms ease,
+    box-shadow
+      160ms ease,
+    filter
+      160ms ease;
+}
+
+.promo-button
+  + .promo-button {
+  margin-top:
+    clamp(
+      8px,
+      4cqi,
+      10px
+    );
+}
+
+.promo-button:hover {
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0
+      clamp(
+        3px,
+        1.5cqi,
+        5px
+      )
+      clamp(
+        7px,
+        4cqi,
+        12px
+      )
+      rgba(
+        0,
+        44,
+        70,
+        0.25
+      );
+
+  filter:
+    brightness(1.035);
+}
+
+.promo-button:active {
+  transform:
+    translateY(0);
+}
+
+.promo-button:focus-visible {
+  outline:
+    3px solid
+    rgba(
+      214,
+      31,
+      62,
+      0.35
+    );
+
+  outline-offset: 3px;
+}
+
+.promo-button-blue {
+  background: #073b65;
+}
+
+.promo-button-blue:focus-visible {
+  outline-color:
+    rgba(
+      7,
+      59,
+      101,
+      0.35
+    );
+}
+
+/* =========================================================
+   LARGE SCREENS
+========================================================= */
+
+@media (
+  min-width: 1800px
+) {
+  .center-content {
+    width: 700px;
+  }
+
+  .featured-column {
+    width: 235px;
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (
+  max-width: 1400px
+) {
+  :root {
+    --landing-height:
+      clamp(
+        700px,
+        48vw,
+        800px
+      );
+  }
+
+  .wings-landing {
+    min-height: 700px;
+  }
+
+  .landing-layout {
+    padding:
+      34px
+      38px
+      38px;
+  }
+
+  .top-actions {
+    top: 45px;
+
+    left: 46px;
+    right: 46px;
+  }
+
+  .center-content {
+    top: 50%;
+
+    width: 570px;
+  }
+
+  .main-logo-wrap {
+    width: 178px;
+
+    min-height: 178px;
+  }
+
+  .main-tagline {
+    font-size: 19px;
+  }
+
+  .center-divider {
+    margin:
+      28px
+      0
+      28px;
+  }
+
+  .social-section {
+    margin-top: 30px;
+  }
+
+  .livebarn-link {
+    width: 500px;
+
+    margin-top: 42px;
+  }
+
+  .featured-column {
+    top: 170px;
+
+    right: 46px;
+
+    width: 205px;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (
+  max-width: 1024px
+) {
+  :root {
+    --landing-height: auto;
+  }
+
+  .wings-landing {
+    height: auto;
+
+    min-height: 760px;
+  }
+
+  .landing-layout {
+    display: grid;
+
+    grid-template-columns:
+      1fr;
+
+    width: 100%;
+    height: auto;
+
+    min-height: 760px;
+
+    padding:
+      32px
+      30px
+      38px;
+  }
+
+  .top-actions {
+    position: relative;
+
+    top: auto;
+    right: auto;
+    left: auto;
+
+    display: flex;
+
+    width: 100%;
+
+    margin-bottom:
+      30px;
+  }
+
+  .center-content {
+    position: relative;
+
+    top: auto;
+    left: auto;
+
+    width: 100%;
+
+    transform: none;
+
+    padding:
+      10px
+      215px
+      20px
+      0;
+  }
+
+  .main-logo-wrap {
+    width: 185px;
+
+    min-height: 185px;
+  }
+
+  .main-tagline {
+    max-width: 550px;
+
+    font-size: 20px;
+  }
+
+  .featured-column {
+    top: 154px;
+
+    right: 28px;
+
+    width: 190px;
+  }
+
+  .livebarn-link {
+    width:
+      min(
+        500px,
+        100%
+      );
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 767px
+) {
+  .wings-landing {
+    min-height: 0;
+  }
+
+  .landing-layout {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+
+    padding:
+      22px
+      18px
+      28px;
+  }
+
+  .background-image {
+    object-position:
+      center center;
+  }
+
+  .background-blue-wash {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(
+          13,
+          40,
+          68,
+          0.58
+        )
+          0%,
+        rgba(
+          44,
+          72,
+          91,
+          0.62
+        )
+          55%,
+        rgba(
+          88,
+          111,
+          127,
+          0.68
+        )
+          100%
+      );
+  }
+
+  .top-actions {
+    order: 1;
+
+    gap: 14px;
+
+    margin-bottom:
+      28px;
+  }
+
+  .store-button {
+    width: 138px;
+    height: 52px;
+  }
+
+  .store-button-face {
+    width: 100px;
+    height: 49px;
+
+    border-radius: 15px;
+  }
+
+  .store-button-face span {
+    font-size: 8px;
+  }
+
+  .store-wing {
+    top: 8px;
+
+    width: 36px;
+    height: 28px;
+  }
+
+  .store-wing i:nth-child(1) {
+    width: 35px;
+  }
+
+  .store-wing i:nth-child(2) {
+    width: 27px;
+  }
+
+  .store-wing i:nth-child(3) {
+    width: 20px;
+  }
+
+  .newsletter-button {
+    width: 130px;
+    height: 50px;
+
+    border-radius: 12px;
+  }
+
+  .newsletter-button span {
+    font-size: 8px;
+  }
+
+  .center-content {
+    order: 2;
+
+    padding: 0;
+
+    width: 100%;
+  }
+
+  .main-logo-wrap {
+    width: 176px;
+
+    min-height: 176px;
+  }
+
+  .main-tagline {
+    width: 100%;
+
+    max-width: 500px;
+
+    margin-top: 24px;
+
+    font-size:
+      clamp(
+        16px,
+        4.5vw,
+        20px
+      );
+
+    line-height: 1.35;
+
+    letter-spacing:
+      0.12em;
+  }
+
+  .center-divider {
+    width: 150px;
+
+    margin:
+      26px
+      0
+      25px;
+  }
+
+  .ice-rentals-button {
+    min-width: 215px;
+    min-height: 58px;
+
+    font-size: 16px;
+  }
+
+  .social-section {
+    margin-top: 32px;
+  }
+
+  .social-row {
+    gap: 13px;
+  }
+
+  .social-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .livebarn-link {
+    width:
+      min(
+        100%,
+        510px
+      );
+
+    margin-top: 40px;
+  }
+
+  .featured-column {
+    position: relative;
+
+    order: 3;
+
+    top: auto;
+    right: auto;
+
+    width:
+      min(
+        100%,
+        650px
+      );
+
+    margin:
+      34px auto 0;
+  }
+
+  .promo-page {
+    width: 100%;
+  }
+
+  .promo-card {
+    max-width: 650px;
+
+    border-radius:
+      clamp(
+        8px,
+        1.846cqi,
+        12px
+      );
+  }
+
+  .promo-content {
+    flex-direction: row;
+    align-items: stretch;
+
+    padding:
+      clamp(
+        6px,
+        2cqi,
+        13px
+      );
+  }
+
+  .promo-program {
+    flex: 1 1 0;
+
+    min-width: 0;
+
+    justify-content: center;
+  }
+
+  .promo-subdivider {
+    margin:
+      clamp(
+        4px,
+        1.846cqi,
+        8px
+      )
+      0;
+  }
+
+  .promo-divider {
+    width:
+      clamp(
+        1.5px,
+        0.308cqi,
+        2px
+      );
+
+    height: auto;
+
+    align-self: stretch;
+
+    margin:
+      0
+      clamp(
+        4px,
+        1.231cqi,
+        8px
+      );
+  }
+
+  .promo-heading {
+    margin-bottom:
+      clamp(
+        4px,
+        1.231cqi,
+        8px
+      );
+
+    font-size:
+      clamp(
+        13px,
+        3.692cqi,
+        24px
+      );
+
+    line-height: 1.1;
+
+    letter-spacing:
+      -0.1px;
+  }
+
+  .promo-button {
+    width: 85%;
+
+    margin: 0 auto;
+
+    min-height:
+      clamp(
+        26px,
+        6.462cqi,
+        42px
+      );
+
+    padding:
+      clamp(
+        3px,
+        1.231cqi,
+        8px
+      )
+      clamp(
+        4px,
+        1.846cqi,
+        12px
+      );
+
+    border-radius:
+      clamp(
+        3px,
+        0.769cqi,
+        5px
+      );
+
+    font-size:
+      clamp(
+        6px,
+        1.538cqi,
+        10px
+      );
+
+    letter-spacing:
+      clamp(
+        0.3px,
+        0.123cqi,
+        0.8px
+      );
+  }
+
+  .promo-button
+    + .promo-button {
+    margin-top:
+      clamp(
+        4px,
+        1.231cqi,
+        8px
+      );
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE PROMO CARD
+========================================================= */
+
+@media (
+  max-width: 360px
+) {
+  .promo-content {
+    padding: 6px;
+  }
+
+  .promo-divider {
+    margin:
+      0 5px;
+  }
+
+  .promo-heading {
+    margin-bottom: 4px;
+
+    font-size: 12px;
+  }
+
+  .promo-button {
+    min-height: 24px;
+
+    padding: 4px;
+
+    font-size: 6px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (
+  max-width: 480px
+) {
+  .landing-layout {
+    padding:
+      17px
+      14px
+      24px;
+  }
+
+  .top-actions {
+    gap: 9px;
+  }
+
+  .store-button {
+    width: 124px;
+  }
+
+  .store-button-face {
+    width: 91px;
+  }
+
+  .newsletter-button {
+    width: 116px;
+  }
+
+  .main-logo-wrap {
+    width: 158px;
+
+    min-height: 158px;
+  }
+
+  .main-tagline {
+    font-size: 15px;
+
+    letter-spacing:
+      0.105em;
+  }
+
+  .ice-rentals-button {
+    min-width: 205px;
+  }
+
+  .livebarn-fallback {
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: center;
+  }
+
+  .livebarn-fallback strong {
+    font-size: 29px;
+  }
+
+  .livebarn-fallback span {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .background-slide {
+    transition: none;
+
+    transform: none;
+  }
+
+  .promo-card {
+    animation: none;
+  }
+
+  .store-button,
+  .newsletter-button,
+  .ice-rentals-button,
+  .social-button,
+  .promo-button,
+  .livebarn-link {
+    transition: none;
+  }
+}
