@@ -22,34 +22,37 @@ const MITES_LTP_URL =
 const ADULT_HOCKEY_URL =
   "https://www.wingsarena.com/adult-hockey-classes";
 
+const CATCHCORNER_URL =
+  "https://www.catchcorner.com/facility-page/embedded/rental/wings-arena";
+
 const socialLinks = [
   {
     id: "instagram",
     label: "Instagram",
     image: "assets/instagram.png",
     fallback: "IG",
-    href: "https://www.instagram.com/wingsarena/",
+    href: "https://www.instagram.com/wingsarenact?igsh=MWZ0aTlwZHdhemZyeQ%3D%3D&utm_source=qr",
   },
   {
     id: "facebook",
     label: "Facebook",
     image: "assets/facebook.png",
     fallback: "f",
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/profile.php?id=61577163134118",
   },
   {
-    id: "livestream",
-    label: "Live stream",
-    image: "assets/livestream.png",
+    id: "livebarn",
+    label: "LiveBarn",
+    image: "assets/livebarn.png",
     fallback: "◉",
-    href: "https://livebarn.com/",
+    href: "https://watch.livebarn.com/en/video/5540/live",
   },
   {
-    id: "captions",
-    label: "Closed captions",
-    image: "assets/closed-caption.png",
+    id: "catchcorner",
+    label: "CatchCorner",
+    image: "assets/catchcorner.png",
     fallback: "CC",
-    href: "https://www.wingsarena.com/",
+    href: CATCHCORNER_URL,
   },
 ];
 
@@ -121,16 +124,18 @@ function StoreButton() {
   return (
     <a
       className="store-button"
-      href="https://www.wingsarena.com/"
+      href="https://shop.gearupwithus.com/wings-arena"
       target="_top"
     >
       <span
         className="store-wing store-wing-left"
         aria-hidden="true"
       >
-        <i />
-        <i />
-        <i />
+        <span className="store-wing-feathers">
+          <i />
+          <i />
+          <i />
+        </span>
       </span>
 
       <span className="store-button-face">
@@ -142,9 +147,11 @@ function StoreButton() {
         className="store-wing store-wing-right"
         aria-hidden="true"
       >
-        <i />
-        <i />
-        <i />
+        <span className="store-wing-feathers">
+          <i />
+          <i />
+          <i />
+        </span>
       </span>
     </a>
   );
@@ -385,7 +392,7 @@ function App() {
 
             <a
               className="ice-rentals-button"
-              href="https://www.wingsarena.com/ice-rentals"
+              href={CATCHCORNER_URL}
               target="_top"
             >
               ICE RENTALS
