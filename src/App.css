@@ -276,16 +276,16 @@
 
   right:
     clamp(
-      48px,
-      5vw,
-      94px
+      72px,
+      9vw,
+      190px
     );
 
   left:
     clamp(
-      48px,
-      5vw,
-      94px
+      72px,
+      9vw,
+      190px
     );
 
   display: flex;
@@ -665,16 +665,16 @@
 
   width:
     clamp(
-      222px,
-      13.6vw,
-      284px
+      244px,
+      15vw,
+      312px
     );
 
   min-height:
     clamp(
-      222px,
-      13.6vw,
-      284px
+      244px,
+      15vw,
+      312px
     );
 }
 
@@ -787,6 +787,9 @@
 ========================================================= */
 
 .center-divider {
+  position: relative;
+  top: 45px;
+
   width:
     clamp(
       145px,
@@ -823,6 +826,9 @@
 ========================================================= */
 
 .ice-rentals-button {
+  position: relative;
+  top: 45px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1033,10 +1039,13 @@
   max-width: 100%;
 
   margin-top:
-    clamp(
-      50px,
-      4vw,
-      76px
+    calc(
+      clamp(
+        50px,
+        4vw,
+        76px
+      )
+      - 10px
     );
 
   transition:
@@ -1562,7 +1571,7 @@
   font-weight: 900;
   font-style: italic;
 
-  line-height: 1.08;
+  line-height: 1.28;
 
   letter-spacing:
     clamp(
@@ -1815,8 +1824,8 @@
   .top-actions {
     top: 45px;
 
-    left: 46px;
-    right: 46px;
+    left: 110px;
+    right: 110px;
   }
 
   .center-content {
@@ -1826,9 +1835,9 @@
   }
 
   .main-logo-wrap {
-    width: 220px;
+    width: 242px;
 
-    min-height: 220px;
+    min-height: 242px;
   }
 
   .main-tagline {
@@ -1849,7 +1858,7 @@
   .livebarn-link {
     width: 500px;
 
-    margin-top: 42px;
+    margin-top: 32px;
   }
 
   .featured-column {
@@ -1928,9 +1937,9 @@
   }
 
   .main-logo-wrap {
-    width: 228px;
+    width: 250px;
 
-    min-height: 228px;
+    min-height: 250px;
   }
 
   .main-tagline {
@@ -1970,6 +1979,7 @@
   .landing-layout {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     min-height: 0;
 
@@ -2017,6 +2027,14 @@
 
     gap: 14px;
 
+    padding:
+      0
+      clamp(
+        14px,
+        5vw,
+        30px
+      );
+
     margin-bottom:
       28px;
   }
@@ -2044,6 +2062,14 @@
     height: 28px;
   }
 
+  .store-wing-left {
+    left: -7px;
+  }
+
+  .store-wing-right {
+    right: -7px;
+  }
+
   .store-wing i:nth-child(1) {
     width: 35px;
   }
@@ -2067,21 +2093,23 @@
     font-size: 8px;
   }
 
+  /* flatten center-content so the featured card can be
+     ordered between the divider and the social section */
   .center-content {
-    order: 2;
-
-    padding: 0;
-
-    width: 100%;
+    display: contents;
   }
 
   .main-logo-wrap {
-    width: 214px;
+    order: 2;
 
-    min-height: 214px;
+    width: 236px;
+
+    min-height: 236px;
   }
 
   .main-tagline {
+    order: 3;
+
     width: 100%;
 
     max-width: 500px;
@@ -2101,7 +2129,22 @@
       0.12em;
   }
 
+  .ice-rentals-button {
+    order: 4;
+
+    top: 29px;
+
+    min-width: 215px;
+    min-height: 58px;
+
+    font-size: 16px;
+  }
+
   .center-divider {
+    order: 5;
+
+    top: 29px;
+
     width: 150px;
 
     margin:
@@ -2110,14 +2153,9 @@
       19px;
   }
 
-  .ice-rentals-button {
-    min-width: 215px;
-    min-height: 58px;
-
-    font-size: 16px;
-  }
-
   .social-section {
+    order: 7;
+
     margin-top: 32px;
   }
 
@@ -2131,19 +2169,21 @@
   }
 
   .livebarn-link {
+    order: 8;
+
     width:
       min(
         100%,
         510px
       );
 
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   .featured-column {
     position: relative;
 
-    order: 3;
+    order: 6;
 
     top: auto;
     right: auto;
@@ -2239,7 +2279,7 @@
         24px
       );
 
-    line-height: 1.1;
+    line-height: 1.28;
 
     letter-spacing:
       -0.1px;
@@ -2364,9 +2404,9 @@
   }
 
   .main-logo-wrap {
-    width: 192px;
+    width: 210px;
 
-    min-height: 192px;
+    min-height: 210px;
   }
 
   .main-tagline {

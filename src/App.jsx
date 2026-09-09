@@ -385,11 +385,6 @@ function App() {
               ARENA
             </h1>
 
-            <div
-              className="center-divider"
-              aria-hidden="true"
-            />
-
             <a
               className="ice-rentals-button"
               href={CATCHCORNER_URL}
@@ -397,6 +392,11 @@ function App() {
             >
               ICE RENTALS
             </a>
+
+            <div
+              className="center-divider"
+              aria-hidden="true"
+            />
 
             <div className="social-section">
               <p>FOLLOW US ON</p>
