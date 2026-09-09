@@ -404,7 +404,7 @@
 
   color: #ffffff;
 
-  background: #cf3e43;
+  background: #d60037;
 
   box-shadow:
     inset
@@ -534,7 +534,7 @@
   border-radius:
     100% 0 0 100%;
 
-  background: #cf3e43;
+  background: #d60037;
 
   transform:
     skewX(-25deg);
@@ -699,16 +699,16 @@
 
   width:
     clamp(
-      244px,
-      15vw,
-      312px
+      208px,
+      12.75vw,
+      265px
     );
 
   min-height:
     clamp(
-      244px,
-      15vw,
-      312px
+      208px,
+      12.75vw,
+      265px
     );
 
   animation:
@@ -748,12 +748,21 @@
 
   filter:
     drop-shadow(
-      0 4px 3px
+      0 3px 6px
         rgba(
           0,
+          8,
+          20,
+          0.4
+        )
+    )
+    drop-shadow(
+      0 12px 22px
+        rgba(
           0,
-          0,
-          0.18
+          8,
+          20,
+          0.35
         )
     );
 }
@@ -885,9 +894,9 @@
 
   width:
     clamp(
-      145px,
-      9.3vw,
-      180px
+      118px,
+      7.6vw,
+      148px
     );
 
   height: 2px;
@@ -910,7 +919,7 @@
       255,
       255,
       255,
-      0.8
+      0.4
     );
 }
 
@@ -947,13 +956,13 @@
 
   min-height:
     clamp(
-      58px,
-      3.6vw,
-      70px
+      52px,
+      3.2vw,
+      62px
     );
 
   padding:
-    16px 28px;
+    12px 28px;
 
   border-radius: 12px;
 
@@ -1270,13 +1279,15 @@
 
   object-fit: contain;
 
+  border-radius: 75px;
+
   box-shadow:
     0 5px 11px
       rgba(
         0,
         0,
         0,
-        0.27
+        0.47
       );
 }
 
@@ -1294,6 +1305,8 @@
   color: #ffffff;
 
   background: #081930;
+
+  border-radius: 12px;
 
   box-shadow:
     0 5px 11px
@@ -1529,20 +1542,20 @@
 .promo-topbar {
   height:
     clamp(
-      28px,
-      12cqi,
-      38px
+      32px,
+      13.5cqi,
+      44px
     );
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   gap:
     clamp(
-      6px,
-      3cqi,
-      10px
+      4px,
+      2cqi,
+      7px
     );
 
   padding:
@@ -1561,6 +1574,22 @@
       #062e52 0%,
       #0a416c 100%
     );
+}
+
+.promo-icon {
+  flex: 0 0 auto;
+
+  width:
+    clamp(
+      15px,
+      6.5cqi,
+      22px
+    );
+  height: auto;
+}
+
+.promo-icon-flip {
+  transform: scaleX(-1);
 }
 
 .promo-logo {
@@ -1605,24 +1634,21 @@
 }
 
 .promo-topbar-label {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
 
   min-width: 0;
 
   overflow: hidden;
 
-  color: #ffffff;
+  color: #e6811f;
 
   text-align: center;
 
-  transform:
-    translateX(-15px);
-
   font-size:
     clamp(
-      9px,
-      3.9cqi,
-      12px
+      12px,
+      5.4cqi,
+      18px
     );
 
   font-weight: 800;
@@ -1985,6 +2011,32 @@
 }
 
 /* =========================================================
+   DESKTOP — DROP THE LOWER STACK
+========================================================= */
+
+@media (
+  min-width: 1025px
+) {
+  /* everything below the tagline sits lower; the featured
+     card is positioned separately and untouched */
+  .center-divider {
+    top: 55px;
+  }
+
+  /* button rides ~14px higher than the divider — closer to
+     the tagline, further from the line below */
+  .ice-rentals-button {
+    top: 41px;
+  }
+
+  .social-section,
+  .livebarn-link {
+    position: relative;
+    top: 25px;
+  }
+}
+
+/* =========================================================
    LARGE SCREENS
 ========================================================= */
 
@@ -2041,9 +2093,9 @@
   }
 
   .main-logo-wrap {
-    width: 242px;
+    width: 206px;
 
-    min-height: 242px;
+    min-height: 206px;
   }
 
   .main-tagline {
@@ -2142,9 +2194,9 @@
   }
 
   .main-logo-wrap {
-    width: 250px;
+    width: 213px;
 
-    min-height: 250px;
+    min-height: 213px;
   }
 
   .main-tagline {
@@ -2299,9 +2351,9 @@
   .main-logo-wrap {
     order: 2;
 
-    width: 236px;
+    width: 201px;
 
-    min-height: 236px;
+    min-height: 201px;
   }
 
   .main-tagline {
@@ -2329,10 +2381,10 @@
   .ice-rentals-button {
     order: 4;
 
-    top: 29px;
+    top: 15px;
 
     min-width: 215px;
-    min-height: 58px;
+    min-height: 52px;
 
     font-size: 16px;
   }
@@ -2342,7 +2394,7 @@
 
     top: 29px;
 
-    width: 150px;
+    width: 124px;
 
     margin:
       20px
@@ -2382,7 +2434,9 @@
 
     order: 6;
 
-    top: auto;
+    /* nudge the card down: further from the divider above,
+       closer to the social section below — flow unchanged */
+    top: 15px;
     right: auto;
 
     width:
@@ -2568,15 +2622,15 @@
   }
 
   .promo-topbar {
-    height: 26px;
+    height: 30px;
   }
 
   .promo-topbar-label {
-    font-size: 10px;
+    font-size: 15px;
   }
 
-  .promo-logo {
-    height: 15px;
+  .promo-icon {
+    width: 18px;
   }
 
   .promo-content {
@@ -2629,12 +2683,58 @@
     margin-bottom: 18px;
   }
 
+  .store-button {
+    height: 44px;
+  }
+
+  .store-button-face {
+    height: 40px;
+  }
+
+  .store-wing {
+    top: -1px;
+  }
+
+  .newsletter-button {
+    height: 43px;
+  }
+
   .main-tagline {
     margin-top: 2px;
   }
 
   .social-section p {
     margin-bottom: 8px;
+
+    font-size: 9px;
+
+    letter-spacing:
+      0.1em;
+  }
+
+  .social-row {
+    gap: 11px;
+  }
+
+  .social-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* everything below the tagline sits 10px lower; the
+     featured card keeps its place in the stack */
+  .center-divider {
+    top: 39px;
+  }
+
+  .ice-rentals-button {
+    top: 25px;
+  }
+
+  .social-section,
+  .livebarn-link {
+    position: relative;
+    top: 10px;
   }
 }
 
@@ -2700,9 +2800,9 @@
   }
 
   .main-logo-wrap {
-    width: 210px;
+    width: 179px;
 
-    min-height: 210px;
+    min-height: 179px;
   }
 
   .main-tagline {

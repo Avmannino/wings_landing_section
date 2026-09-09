@@ -102,6 +102,49 @@ function AssetImage({
   );
 }
 
+function PumpkinIcon({
+  flip = false,
+}) {
+  return (
+    <svg
+      className={`promo-icon ${
+        flip ? "promo-icon-flip" : ""
+      }`}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 6c.7-2 2.6-2.6 3.3-1.6.6.9-.3 2.2-1.6 2.8"
+        fill="none"
+        stroke="#5f7d3a"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <ellipse
+        cx="8.6"
+        cy="14.5"
+        rx="3.5"
+        ry="5.7"
+        fill="#d9741c"
+      />
+      <ellipse
+        cx="15.4"
+        cy="14.5"
+        rx="3.5"
+        ry="5.7"
+        fill="#d9741c"
+      />
+      <ellipse
+        cx="12"
+        cy="14.7"
+        rx="4.3"
+        ry="6.3"
+        fill="#ef8a22"
+      />
+    </svg>
+  );
+}
+
 function BackgroundCarousel({
   activeBackground,
 }) {
@@ -236,21 +279,13 @@ function PromotionalCard() {
     <main className="promo-page">
       <article className="promo-card">
         <div className="promo-topbar">
-          <AssetImage
-            src="assets/wings-logo.png"
-            webpSrc="assets/wings-logo.webp"
-            alt="Wings Arena"
-            className="promo-logo"
-            fallback={
-              <span className="promo-logo-fallback">
-                W
-              </span>
-            }
-          />
+          <PumpkinIcon />
 
           <span className="promo-topbar-label">
-            Featured Programs
+            Fall Programs
           </span>
+
+          <PumpkinIcon flip />
         </div>
 
         <div className="promo-content">
