@@ -500,7 +500,7 @@
 }
 
 .store-wing-left {
-  left: 8px;
+  left: 17px;
 
   transform:
     rotate(14deg);
@@ -517,7 +517,7 @@
 }
 
 .store-wing-right {
-  right: 8px;
+  right: 17px;
 
   transform:
     scaleX(-1)
@@ -3220,11 +3220,11 @@
   }
 
   .store-wing-left {
-    left: -2px;
+    left: 0px;
   }
 
   .store-wing-right {
-    right: -2px;
+    right: 0px;
   }
 
   .store-wing i:nth-child(1) {
