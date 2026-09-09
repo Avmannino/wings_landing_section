@@ -1781,9 +1781,9 @@
 
   gap:
     clamp(
-      4px,
-      2cqi,
-      7px
+      10px,
+      4cqi,
+      18px
     );
 
   padding:
@@ -1874,18 +1874,30 @@
 
   font-size:
     clamp(
-      12px,
-      5.4cqi,
-      18px
+      9px,
+      3.7cqi,
+      13px
     );
 
   font-weight: 800;
 
-  letter-spacing: 0.6px;
+  letter-spacing: 0.4px;
 
   text-transform: uppercase;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.promo-topbar-sep {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.5
+    );
+
+  font-weight: 300;
 }
 
 /* =========================================================
@@ -2434,6 +2446,24 @@
 }
 
 /* =========================================================
+   MID-LARGE DESKTOP AND UP — COLUMN HIGHER, SPACE BELOW BANNER
+========================================================= */
+
+@media (
+  min-width: 1450px
+) {
+  /* lift the whole centered column; section height unchanged
+     so the gap opens up below the banner */
+  .center-content {
+    transform:
+      translate(
+        -50%,
+        calc(-50% + 8px)
+      );
+  }
+}
+
+/* =========================================================
    LAPTOP
 ========================================================= */
 
@@ -2474,6 +2504,13 @@
     top: 50%;
 
     width: 570px;
+
+    /* whole column sits higher (section height unchanged) */
+    transform:
+      translate(
+        -50%,
+        calc(-50% + 12px)
+      );
   }
 
   .main-logo-wrap {
@@ -2562,7 +2599,7 @@
 @media (
   min-width: 1025px
 ) and (
-  max-width: 1420px
+  max-width: 1400px
 ) {
   /* ~30px further below the social links (matches the
      hidden-divider baseline shift) */
@@ -2871,17 +2908,18 @@
     font-size: 16px;
   }
 
+  /* stacked layout: divider stays hidden but keeps ~half its
+     old flow gap, so the card + content sit partway up */
   .center-divider {
     order: 5;
 
-    top: 29px;
-
-    width: 124px;
+    height: 0;
+    width: 0;
 
     margin:
-      20px
+      11px
       0
-      19px;
+      10px;
   }
 
   .social-section {
@@ -3108,11 +3146,11 @@
   }
 
   .promo-topbar-label {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .promo-icon {
-    width: 18px;
+    width: 16px;
   }
 
   .promo-content {
@@ -3187,7 +3225,7 @@
   /* content column sits at the top; its transparent
      bottom padding lets the background show under the banner */
   .wings-landing {
-    min-height: 760px;
+    min-height: 736px;
   }
 
   .landing-layout {
@@ -3196,15 +3234,16 @@
     padding-top: 16px;
     padding-bottom:
       clamp(
-        30px,
-        5vw,
-        58px
+        26px,
+        4.5vw,
+        51px
       );
   }
 
-  /* pull the whole column up under the (unmoved) top buttons */
+  /* pull the whole column up under the (unmoved) top buttons —
+     section height is fixed, so the gap opens below the banner */
   .top-actions {
-    margin-bottom: 12px;
+    margin-bottom: 0;
   }
 
   /* card sits a bit higher; relative offset, nothing else moves */
@@ -3230,9 +3269,9 @@
   .landing-layout {
     padding-bottom:
       clamp(
-        38px,
-        11vw,
-        68px
+        31px,
+        9.5vw,
+        57px
       );
   }
 
@@ -3305,20 +3344,37 @@
     height: 34px;
   }
 
-  /* everything below the tagline sits 10px lower; the
-     featured card keeps its place in the stack */
-  .center-divider {
-    /* ~30px lands it equidistant between the button above
-       and the card below (gap ≈ 25px each side) */
-    top: 30px;
-  }
-
+  /* keep Schedule + ICE RENTALS side by side, like desktop */
   .cta-row {
     top: 25px;
 
-    flex-direction: column;
+    width:
+      min(
+        94%,
+        356px
+      );
 
-    gap: 10px;
+    gap: 8px;
+  }
+
+  .cta-row .schedule-button,
+  .cta-row .ice-rentals-button {
+    flex: 1 1 0;
+
+    min-width: 0;
+
+    padding:
+      10px 6px;
+
+    font-size:
+      clamp(
+        12px,
+        3.8vw,
+        17px
+      );
+
+    letter-spacing:
+      0.06em;
   }
 
   /* pull the card back up toward the divider */
@@ -3398,9 +3454,9 @@
       14px;
     padding-bottom:
       clamp(
-        34px,
-        11vw,
-        64px
+        27px,
+        9.5vw,
+        53px
       );
   }
 
@@ -3433,9 +3489,17 @@
       0.105em;
   }
 
-  .ice-rentals-button,
-  .schedule-button {
-    min-width: 205px;
+  .cta-row .schedule-button,
+  .cta-row .ice-rentals-button {
+    padding:
+      9px 4px;
+
+    font-size:
+      clamp(
+        11px,
+        3.4vw,
+        15px
+      );
   }
 
   .livebarn-fallback {

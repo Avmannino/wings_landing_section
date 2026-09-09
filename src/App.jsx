@@ -294,7 +294,11 @@ function PromotionalCard() {
           <PumpkinIcon />
 
           <span className="promo-topbar-label">
-            Fall Programs
+            Fall{" "}
+            <span className="promo-topbar-sep">
+              |
+            </span>{" "}
+            Open Registrations
           </span>
 
           <PumpkinIcon flip />
