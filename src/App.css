@@ -2615,6 +2615,30 @@
 }
 
 /* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 767px
+) {
+  /* nudge the buttons down 10px, and pull the rest of the column
+     up 10px (28px stacked margin - 10) without moving the buttons */
+  .top-actions {
+    top: 10px;
+
+    margin-bottom: 18px;
+  }
+
+  .main-tagline {
+    margin-top: 2px;
+  }
+
+  .social-section p {
+    margin-bottom: 8px;
+  }
+}
+
+/* =========================================================
    VERY SMALL MOBILE PROMO CARD
 ========================================================= */
 
