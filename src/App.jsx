@@ -74,6 +74,9 @@ function AssetImage({
   alt = "",
   className = "",
   fallback = null,
+  loading,
+  decoding,
+  fetchPriority,
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -92,6 +95,9 @@ function AssetImage({
       className={className}
       src={`${base}${src}`}
       alt={alt}
+      loading={loading}
+      decoding={decoding}
+      fetchPriority={fetchPriority}
       onError={() => {
         setFailed(true);
       }}
@@ -159,6 +165,7 @@ function PumpkinIcon({
 
 function BackgroundCarousel({
   activeBackground,
+  loadedSlides,
 }) {
   return (
     <div
@@ -175,29 +182,27 @@ function BackgroundCarousel({
             }`}
             key={image}
           >
-            <picture>
-              <source
-                type="image/webp"
-                srcSet={`${import.meta.env.BASE_URL}${image}.webp`}
-              />
+            {loadedSlides.includes(index) && (
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`${import.meta.env.BASE_URL}${image}.webp`}
+                />
 
-              <img
-                className="background-image"
-                src={`${import.meta.env.BASE_URL}${image}.jpg`}
-                alt=""
-                loading={
-                  index === 0
-                    ? "eager"
-                    : "lazy"
-                }
-                fetchPriority={
-                  index === 0
-                    ? "high"
-                    : "low"
-                }
-                decoding="async"
-              />
-            </picture>
+                <img
+                  className="background-image"
+                  src={`${import.meta.env.BASE_URL}${image}.jpg`}
+                  alt=""
+                  loading="eager"
+                  fetchPriority={
+                    index === 0
+                      ? "high"
+                      : "low"
+                  }
+                  decoding="async"
+                />
+              </picture>
+            )}
           </div>
         ),
       )}
@@ -252,7 +257,7 @@ function NewsletterButton() {
   return (
     <a
       className="newsletter-button"
-      href="https://www.wingsarena.com/"
+      href="http://eepurl.com/jpMhqI"
       target="_top"
     >
       <span>WINGS</span>
@@ -307,10 +312,6 @@ function PromotionalCard() {
         <div className="promo-content">
           <div className="promo-program">
             <div className="promo-heading">
-              <span className="promo-heading-blue">
-                FALL
-              </span>
-
               <span className="promo-heading-red">
                 LEARN TO PLAY
               </span>
@@ -319,7 +320,7 @@ function PromotionalCard() {
                 &amp;
               </span>
 
-              <span className="promo-heading-red">
+              <span className="promo-heading-skate">
                 LEARN TO SKATE
               </span>
             </div>
@@ -398,6 +399,13 @@ function App() {
     setActiveBackground,
   ] = useState(0);
 
+  // Only the first slide ships on load; the rest are mounted just before
+  // they're needed so ~360KB of imagery stays off the critical path.
+  const [
+    loadedSlides,
+    setLoadedSlides,
+  ] = useState([0]);
+
   useEffect(() => {
     if (
       backgroundImages.length <= 1
@@ -414,6 +422,23 @@ function App() {
       return undefined;
     }
 
+    // Stagger the remaining slides onto the page: each is mounted one
+    // carousel step before its turn, so its image has time to load but
+    // never competes with the first paint.
+    const warmers = backgroundImages
+      .slice(1)
+      .map((_, offset) =>
+        window.setTimeout(
+          () => {
+            setLoadedSlides((slides) => [
+              ...slides,
+              offset + 1,
+            ]);
+          },
+          1200 + offset * CAROUSEL_INTERVAL,
+        ),
+      );
+
     const interval =
       window.setInterval(() => {
         setActiveBackground(
@@ -424,6 +449,7 @@ function App() {
       }, CAROUSEL_INTERVAL);
 
     return () => {
+      warmers.forEach(window.clearTimeout);
       window.clearInterval(
         interval,
       );
@@ -436,6 +462,9 @@ function App() {
         <BackgroundCarousel
           activeBackground={
             activeBackground
+          }
+          loadedSlides={
+            loadedSlides
           }
         />
 
@@ -457,6 +486,8 @@ function App() {
                 webpSrc="assets/wings-logo.webp"
                 alt="Wings Arena"
                 className="main-logo"
+                fetchPriority="high"
+                decoding="async"
                 fallback={
                   <div className="main-logo-fallback">
                     <span>WINGS</span>
@@ -520,9 +551,12 @@ function App() {
               aria-label="LiveBarn"
             >
               <AssetImage
-                src="assets/livebarn.jpg"
+                src="assets/livebarn-banner.jpg"
+                webpSrc="assets/livebarn-banner.webp"
                 alt="LiveBarn - Streaming Live and On Demand"
                 className="livebarn-banner"
+                loading="lazy"
+                decoding="async"
                 fallback={
                   <div className="livebarn-fallback">
                     <strong>

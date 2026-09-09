@@ -18,6 +18,10 @@ const OUT = join(root, "public", "assets");
 // tolerate aggressive compression. 1920w covers all common viewports.
 const backgrounds = ["background-01", "background-02", "background-03"];
 
+// Photographic banners — keep a JPG fallback, add a WebP. ~1000w is plenty
+// for a strip that renders at most ~560px CSS wide.
+const banners = [{ name: "livebarn-banner", width: 1000 }];
+
 // Transparent art — keep a PNG for compatibility, add a much smaller WebP.
 // `palette` quantises to <=256 colours: safe for flat icons, skipped for the
 // logo where it could band.
@@ -48,6 +52,24 @@ async function run() {
       .toFile(join(OUT, `${name}.webp`));
 
     console.log(`✓ ${name} → .jpg + .webp @ 1920w`);
+  }
+
+  for (const { name, width } of banners) {
+    const src = sharp(join(RAW, `${name}.jpg`)).resize(width, null, {
+      withoutEnlargement: true,
+    });
+
+    await src
+      .clone()
+      .jpeg({ quality: 80, mozjpeg: true })
+      .toFile(join(OUT, `${name}.jpg`));
+
+    await src
+      .clone()
+      .webp({ quality: 78 })
+      .toFile(join(OUT, `${name}.webp`));
+
+    console.log(`✓ ${name} → .jpg + .webp @ ${width}w`);
   }
 
   for (const { name, width, palette } of pngs) {
