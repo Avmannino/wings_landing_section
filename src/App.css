@@ -1739,28 +1739,28 @@
   background:
     radial-gradient(
       120% 82% at 10% -8%,
-      rgba(255, 255, 255, 0.36) 0%,
-      rgba(255, 255, 255, 0.08) 48%,
+      rgba(255, 255, 255, 0.48) 0%,
+      rgba(255, 255, 255, 0.14) 48%,
       rgba(255, 255, 255, 0) 70%
     ),
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.24) 0%,
-      rgba(239, 247, 253, 0.14) 38%,
-      rgba(218, 234, 246, 0.09) 67%,
-      rgba(255, 255, 255, 0.18) 100%
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(239, 247, 253, 0.22) 38%,
+      rgba(218, 234, 246, 0.16) 67%,
+      rgba(255, 255, 255, 0.26) 100%
     );
 
   backdrop-filter:
     blur(22px)
     saturate(150%)
     contrast(1.03)
-    brightness(1.03);
+    brightness(1.09);
   -webkit-backdrop-filter:
     blur(22px)
     saturate(150%)
     contrast(1.03)
-    brightness(1.03);
+    brightness(1.09);
 
   border:
     clamp(
@@ -1773,7 +1773,7 @@
       255,
       255,
       255,
-      0.62
+      0.68
     );
 
   border-radius:
@@ -1847,16 +1847,8 @@
         0.12
       );
 
-  animation:
-    promo-card-enter
-      750ms
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      )
-      both;
+  /* Entrance motion is desktop-only; see the 1026px+ media query below. */
+  animation: none;
 
   transition:
     transform
@@ -1882,10 +1874,10 @@
   background:
     linear-gradient(
       118deg,
-      rgba(255, 255, 255, 0.16) 0%,
-      rgba(255, 255, 255, 0.04) 29%,
+      rgba(255, 255, 255, 0.19) 0%,
+      rgba(255, 255, 255, 0.06) 29%,
       rgba(255, 255, 255, 0) 48%,
-      rgba(255, 255, 255, 0.07) 72%,
+      rgba(255, 255, 255, 0.09) 72%,
       rgba(255, 255, 255, 0.02) 100%
     );
 }
@@ -1925,6 +1917,18 @@
 .promo-content {
   position: relative;
   z-index: 1;
+}
+
+.promo-roll-edge {
+  display: none;
+}
+
+@media (
+  min-width: 1026px
+) {
+  .promo-roll-edge {
+    display: block;
+  }
 }
 
 .promo-card:hover {
@@ -2002,19 +2006,93 @@
       );
 }
 
-@keyframes promo-card-enter {
-  from {
-    opacity: 0;
+/* =========================================================
+   DESKTOP PROMO CARD — TRUE SCROLL UNROLL
+========================================================= */
 
-    transform:
-      translateY(80px);
+/* The card is collapsed before first paint by useLayoutEffect, then its
+   measured height expands in one uninterrupted motion. This avoids the
+   clip-path/backdrop-filter behavior that could make the card snap visible
+   while only the highlight continued moving. */
+@media (
+  min-width: 1026px
+) {
+  .promo-card.promo-card-unroll-prep {
+    height: 0;
+
+    overflow: hidden;
+
+    transition:
+      height
+        500ms linear 100ms,
+      transform
+        220ms ease,
+      box-shadow
+        220ms ease;
+
+    will-change: height;
   }
 
-  to {
-    opacity: 1;
+  .promo-card.promo-card-unroll-prep.promo-card-unroll-active {
+    height:
+      var(--promo-unroll-height);
+  }
 
-    transform:
-      translateY(0);
+  .promo-card.promo-card-unroll-prep.promo-card-unroll-complete {
+    height: auto;
+
+    will-change: auto;
+  }
+
+  /* This is the rolled front of the "scroll." Because it is anchored to
+     the card's bottom edge, it travels naturally with the expanding card
+     instead of animating independently across an already-visible panel. */
+  .promo-roll-edge {
+    position: absolute;
+    z-index: 4;
+
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 12px;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.12) 28%,
+        rgba(255, 255, 255, 0.62) 58%,
+        rgba(255, 255, 255, 0.24) 78%,
+        rgba(255, 255, 255, 0) 100%
+      );
+
+    box-shadow:
+      0 5px 10px
+        rgba(
+          2,
+          18,
+          36,
+          0.12
+        );
+  }
+
+  .promo-card-unroll-prep
+    .promo-roll-edge {
+    opacity: 1;
+  }
+
+  .promo-card-unroll-complete
+    .promo-roll-edge {
+    opacity: 0;
+
+    transition:
+      opacity
+        160ms ease-out;
   }
 }
 
@@ -3839,10 +3917,14 @@
     transform: none;
   }
 
-  .promo-card {
+  .promo-card,
+  .promo-card::after,
+  .promo-roll-edge {
     animation: none;
   }
 
+  .promo-card,
+  .promo-roll-edge,
   .store-button,
   .store-button-face,
   .store-wing-left,

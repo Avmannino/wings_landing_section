@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import "./App.css";
 
@@ -292,9 +292,90 @@ function SocialButton({
 }
 
 function PromotionalCard() {
+  const cardRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const card = cardRef.current;
+
+    if (!card) {
+      return undefined;
+    }
+
+    const desktopQuery = window.matchMedia(
+      "(min-width: 1026px)",
+    );
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    if (
+      !desktopQuery.matches ||
+      reducedMotionQuery.matches
+    ) {
+      return undefined;
+    }
+
+    // Measure the card at its natural size, then collapse it before the
+    // browser paints. Animating the actual height avoids Chrome's
+    // backdrop-filter + clip-path snap and creates a true top-to-bottom
+    // unrolling motion.
+    const fullHeight = card.scrollHeight;
+
+    card.style.setProperty(
+      "--promo-unroll-height",
+      `${fullHeight}px`,
+    );
+    card.classList.add(
+      "promo-card-unroll-prep",
+    );
+
+    let secondFrame = 0;
+
+    const firstFrame =
+      window.requestAnimationFrame(() => {
+        secondFrame =
+          window.requestAnimationFrame(() => {
+            card.classList.add(
+              "promo-card-unroll-active",
+            );
+          });
+      });
+
+    const finishUnroll = (event) => {
+      if (
+        event.target !== card ||
+        event.propertyName !== "height"
+      ) {
+        return;
+      }
+
+      card.classList.add(
+        "promo-card-unroll-complete",
+      );
+    };
+
+    card.addEventListener(
+      "transitionend",
+      finishUnroll,
+    );
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+
+      card.removeEventListener(
+        "transitionend",
+        finishUnroll,
+      );
+    };
+  }, []);
+
   return (
     <main className="promo-page">
-      <article className="promo-card">
+      <article
+        ref={cardRef}
+        className="promo-card"
+      >
         <div className="promo-topbar">
           <PumpkinIcon />
 
@@ -388,6 +469,11 @@ function PromotionalCard() {
             </a>
           </div>
         </div>
+
+        <span
+          className="promo-roll-edge"
+          aria-hidden="true"
+        />
       </article>
     </main>
   );
