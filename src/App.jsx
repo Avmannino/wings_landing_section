@@ -25,6 +25,18 @@ const ADULT_HOCKEY_URL =
 const CATCHCORNER_URL =
   "https://www.catchcorner.com/facility-page/embedded/rental/wings-arena";
 
+// Asks the parent (Wix) page to scroll to the schedule section.
+// The Wix page needs a matching listener:
+//   $w("#htmlXX").onMessage((e) => {
+//     if (e.data?.type === "wings:scrollTo") $w("#section56").scrollTo();
+//   });
+function requestScheduleScroll() {
+  window.parent.postMessage(
+    { type: "wings:scrollTo", target: "section56" },
+    "*",
+  );
+}
+
 const socialLinks = [
   {
     id: "instagram",
@@ -458,13 +470,23 @@ function App() {
               ARENA
             </h1>
 
-            <a
-              className="ice-rentals-button"
-              href={CATCHCORNER_URL}
-              target="_top"
-            >
-              ICE RENTALS
-            </a>
+            <div className="cta-row">
+              <button
+                type="button"
+                className="schedule-button"
+                onClick={requestScheduleScroll}
+              >
+                Schedule
+              </button>
+
+              <a
+                className="ice-rentals-button"
+                href={CATCHCORNER_URL}
+                target="_top"
+              >
+                ICE RENTALS
+              </a>
+            </div>
 
             <div
               className="center-divider"

@@ -12,10 +12,13 @@
   --wings-white: #ffffff;
 
   --landing-height:
-    clamp(
-      720px,
-      42vw,
-      880px
+    calc(
+      clamp(
+        720px,
+        42vw,
+        880px
+      )
+      - 28px
     );
 
   --landing-content-width: 1540px;
@@ -56,7 +59,7 @@
   height: var(--landing-height);
 
   min-width: 0;
-  min-height: 720px;
+  min-height: 692px;
 
   overflow: hidden;
 
@@ -343,8 +346,16 @@
     );
 
   transition:
-    transform 160ms ease,
-    filter 160ms ease;
+    transform
+      240ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+
+  will-change: transform;
 
   animation:
     store-button-slide-in
@@ -383,18 +394,40 @@
 
 .store-button:hover {
   transform:
-    translateY(-2px);
+    translateY(-3px)
+    scale(1.035);
+}
 
-  filter:
-    drop-shadow(
-      0 8px 7px
-        rgba(
-          0,
-          0,
-          0,
-          0.38
-        )
-    );
+.store-button:hover
+  .store-button-face {
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.1
+      ),
+    0 7px 16px
+      rgba(
+        0,
+        0,
+        0,
+        0.32
+      );
+}
+
+.store-button:hover
+  .store-wing-left {
+  transform:
+    rotate(22deg);
+}
+
+.store-button:hover
+  .store-wing-right {
+  transform:
+    scaleX(-1)
+    rotate(22deg);
 }
 
 .store-button-face {
@@ -432,6 +465,10 @@
         255,
         0.1
       );
+
+  transition:
+    box-shadow
+      240ms ease;
 }
 
 .store-button-face span {
@@ -460,6 +497,16 @@
 
   transform:
     rotate(14deg);
+
+  transition:
+    transform
+      300ms
+      cubic-bezier(
+        0.34,
+        1.35,
+        0.6,
+        1
+      );
 }
 
 .store-wing-right {
@@ -468,6 +515,16 @@
   transform:
     scaleX(-1)
     rotate(14deg);
+
+  transition:
+    transform
+      300ms
+      cubic-bezier(
+        0.34,
+        1.35,
+        0.6,
+        1
+      );
 }
 
 .store-wing-feathers {
@@ -615,10 +672,20 @@
       );
 
   transition:
-    background-color
-      160ms ease,
     transform
-      160ms ease;
+      240ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+    background-color
+      220ms ease,
+    box-shadow
+      240ms ease;
+
+  will-change: transform;
 
   animation:
     newsletter-button-slide-in
@@ -659,7 +726,17 @@
   background: #2d588e;
 
   transform:
-    translateY(-2px);
+    translateY(-3px)
+    scale(1.035);
+
+  box-shadow:
+    0 9px 18px
+      rgba(
+        0,
+        0,
+        0,
+        0.36
+      );
 }
 
 .newsletter-button span {
@@ -694,10 +771,12 @@
       48vw
     );
 
+  /* +34px keeps the column's top where it was after the
+     section was shortened, so only the space below shrinks */
   transform:
     translate(
       -50%,
-      -50%
+      calc(-50% + 34px)
     );
 
   text-align: center;
@@ -907,6 +986,9 @@
   position: relative;
   top: 30px;
 
+  /* hidden but kept in flow so nothing reflows */
+  visibility: hidden;
+
   width:
     clamp(
       118px,
@@ -942,10 +1024,108 @@
    ICE RENTALS
 ========================================================= */
 
-.ice-rentals-button {
+.cta-row {
   position: relative;
   top: 30px;
 
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  gap:
+    clamp(
+      8px,
+      1.4vw,
+      14px
+    );
+}
+
+.schedule-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height:
+    clamp(
+      52px,
+      3.2vw,
+      62px
+    );
+
+  padding:
+    12px 26px;
+
+  border: 0;
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  background: #d60037;
+
+  box-shadow:
+    0 5px 8px
+      rgba(
+        0,
+        0,
+        0,
+        0.26
+      );
+
+  font-size:
+    clamp(
+      15px,
+      0.95vw,
+      20px
+    );
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  animation:
+    social-icon-pop-in
+      420ms
+      cubic-bezier(
+        0.34,
+        1.56,
+        0.64,
+        1
+      )
+      360ms
+      backwards;
+
+  transition:
+    transform
+      240ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+    background-color
+      200ms ease;
+
+  will-change: transform;
+}
+
+.schedule-button:hover {
+  background: #e6104a;
+
+  transform:
+    translateY(-3px)
+    scale(1.035);
+}
+
+.ice-rentals-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1001,7 +1181,7 @@
       21px
     );
 
-  font-weight: 900;
+  font-weight: 800;
 
   line-height: 1;
 
@@ -1040,6 +1220,17 @@
 }
 
 .social-section p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap:
+    clamp(
+      8px,
+      1vw,
+      14px
+    );
+
   margin: 0 0 17px;
 
   color: #ffffff;
@@ -1069,6 +1260,28 @@
       )
       560ms
       backwards;
+}
+
+.social-section p::before,
+.social-section p::after {
+  content: "";
+
+  width:
+    clamp(
+      20px,
+      3vw,
+      42px
+    );
+
+  height: 1.5px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.45
+    );
 }
 
 @keyframes social-text-drop-in {
@@ -2052,6 +2265,13 @@
     width: 205px;
   }
 
+  /* newsletter button matches the store button's face height,
+     and sits a touch narrower */
+  .newsletter-button {
+    width: 190px;
+    height: 54px;
+  }
+
   .store-button-face {
     width: 143px;
 
@@ -2081,22 +2301,49 @@
     top: 55px;
   }
 
-  /* button rides ~14px higher than the divider — closer to
+  /* row rides ~14px higher than the divider — closer to
      the tagline, further from the line below */
-  .ice-rentals-button {
+  .cta-row {
     top: 41px;
   }
 
-  .social-section {
-    position: relative;
-    top: 25px;
+  /* ICE RENTALS + Schedule: same padding / type, and a
+     shared min-width so the two buttons are equal length */
+  .ice-rentals-button {
+    padding:
+      12px 26px;
+
+    font-size:
+      clamp(
+        15px,
+        0.95vw,
+        20px
+      );
+
+    letter-spacing:
+      0.16em;
   }
 
-  /* banner sits 15px higher than the social section above it,
-     without shifting anything else */
+  .ice-rentals-button,
+  .schedule-button {
+    min-width:
+      clamp(
+        190px,
+        12vw,
+        228px
+      );
+  }
+
+  /* divider is hidden — pull the social block + banner up
+     into that space, toward the buttons */
+  .social-section {
+    position: relative;
+    top: -24px;
+  }
+
   .livebarn-link {
     position: relative;
-    top: 10px;
+    top: -20px;
   }
 }
 
@@ -2138,6 +2385,10 @@
     width: 235px;
   }
 
+  .newsletter-button {
+    width: 218px;
+  }
+
   .store-button-face {
     width: 164px;
   }
@@ -2169,6 +2420,20 @@
 }
 
 /* =========================================================
+   MID-LARGE DESKTOP — BUTTONS CLOSER TO THE TAGLINE
+========================================================= */
+
+@media (
+  min-width: 1401px
+) and (
+  max-width: 1920px
+) {
+  .cta-row {
+    top: 34px;
+  }
+}
+
+/* =========================================================
    LAPTOP
 ========================================================= */
 
@@ -2177,15 +2442,18 @@
 ) {
   :root {
     --landing-height:
-      clamp(
-        700px,
-        48vw,
-        800px
+      calc(
+        clamp(
+          700px,
+          48vw,
+          800px
+        )
+        - 28px
       );
   }
 
   .wings-landing {
-    min-height: 700px;
+    min-height: 672px;
   }
 
   .landing-layout {
@@ -2218,6 +2486,11 @@
     font-size: 17px;
   }
 
+  /* buttons ride a little closer to the tagline above */
+  .cta-row {
+    top: 23px;
+  }
+
   .center-divider {
     margin:
       21px
@@ -2227,6 +2500,9 @@
 
   .social-section {
     margin-top: 30px;
+
+    /* social block sits a little lower (banner stays put) */
+    top: -14px;
   }
 
   .livebarn-link {
@@ -2288,9 +2564,10 @@
 ) and (
   max-width: 1420px
 ) {
-  /* +30px below the social links; nothing else moves */
+  /* ~30px further below the social links (matches the
+     hidden-divider baseline shift) */
   .livebarn-link {
-    top: 40px;
+    top: -2px;
   }
 }
 
@@ -2574,11 +2851,20 @@
       0.12em;
   }
 
-  .ice-rentals-button {
+  .cta-row {
     order: 4;
 
     top: 15px;
+  }
 
+  .ice-rentals-button {
+    min-width: 215px;
+    min-height: 52px;
+
+    font-size: 16px;
+  }
+
+  .schedule-button {
     min-width: 215px;
     min-height: 52px;
 
@@ -2910,9 +3196,9 @@
     padding-top: 16px;
     padding-bottom:
       clamp(
-        90px,
-        14vw,
-        150px
+        30px,
+        5vw,
+        58px
       );
   }
 
@@ -2944,9 +3230,9 @@
   .landing-layout {
     padding-bottom:
       clamp(
-        54px,
-        15vw,
-        95px
+        38px,
+        11vw,
+        68px
       );
   }
 
@@ -3027,8 +3313,12 @@
     top: 30px;
   }
 
-  .ice-rentals-button {
+  .cta-row {
     top: 25px;
+
+    flex-direction: column;
+
+    gap: 10px;
   }
 
   /* pull the card back up toward the divider */
@@ -3108,9 +3398,9 @@
       14px;
     padding-bottom:
       clamp(
-        48px,
-        15vw,
-        90px
+        34px,
+        11vw,
+        64px
       );
   }
 
@@ -3143,7 +3433,8 @@
       0.105em;
   }
 
-  .ice-rentals-button {
+  .ice-rentals-button,
+  .schedule-button {
     min-width: 205px;
   }
 
@@ -3183,8 +3474,12 @@
   }
 
   .store-button,
+  .store-button-face,
+  .store-wing-left,
+  .store-wing-right,
   .newsletter-button,
   .ice-rentals-button,
+  .schedule-button,
   .social-button,
   .promo-button,
   .livebarn-link {
@@ -3197,6 +3492,7 @@
   .main-logo-wrap,
   .main-tagline,
   .ice-rentals-button,
+  .schedule-button,
   .social-section p,
   .social-button,
   .livebarn-link {
