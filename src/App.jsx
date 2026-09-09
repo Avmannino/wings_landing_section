@@ -6,6 +6,8 @@ const backgroundImages = [
   "assets/background-01",
   "assets/background-02",
   "assets/background-03",
+  "assets/background-04",
+  "assets/background-05",
 ];
 
 const CAROUSEL_INTERVAL = 4500;

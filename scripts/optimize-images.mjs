@@ -16,7 +16,13 @@ const OUT = join(root, "public", "assets");
 
 // Fullscreen backgrounds: sit behind a gradient wash + vignette, so they
 // tolerate aggressive compression. 1920w covers all common viewports.
-const backgrounds = ["background-01", "background-02", "background-03"];
+const backgrounds = [
+  "background-01",
+  "background-02",
+  "background-03",
+  "background-04",
+  "background-05",
+];
 
 // Photographic banners — keep a JPG fallback, add a WebP. ~1000w is plenty
 // for a strip that renders at most ~560px CSS wide.
