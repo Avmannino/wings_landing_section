@@ -276,16 +276,16 @@
 
   right:
     clamp(
-      72px,
-      9vw,
-      190px
+      38px,
+      6.3vw,
+      146px
     );
 
   left:
     clamp(
-      72px,
-      9vw,
-      190px
+      38px,
+      6.3vw,
+      146px
     );
 
   display: flex;
@@ -1349,9 +1349,9 @@
 
   right:
     clamp(
-      56px,
-      8vw,
-      150px
+      20px,
+      5.3vw,
+      106px
     );
 
   width:
@@ -2017,6 +2017,32 @@
 @media (
   min-width: 1025px
 ) {
+  /* card is vertical (right rail) here — match the store /
+     newsletter buttons to its width */
+  .store-button,
+  .newsletter-button {
+    width: 205px;
+  }
+
+  .store-button-face {
+    width: 143px;
+
+    flex-direction: row;
+
+    gap: 0.34em;
+  }
+
+  .store-button-face span {
+    font-size: 14px;
+
+    letter-spacing:
+      0.09em;
+  }
+
+  .newsletter-button span {
+    font-size: 12.5px;
+  }
+
   /* everything below the tagline sits lower; the featured
      card is positioned separately and untouched */
   .center-divider {
@@ -2056,6 +2082,41 @@
   .featured-column {
     width: 235px;
   }
+
+  /* keep the buttons matched to the wider card */
+  .store-button,
+  .newsletter-button {
+    width: 235px;
+  }
+
+  .store-button-face {
+    width: 164px;
+  }
+
+  .store-button-face span {
+    font-size: 16px;
+  }
+
+  .newsletter-button span {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   QHD / 1440p AND WIDER
+========================================================= */
+
+@media (
+  min-width: 2200px
+) {
+  .social-row {
+    gap: 22px;
+  }
+
+  .social-button {
+    width: 58px;
+    height: 58px;
+  }
 }
 
 /* =========================================================
@@ -2088,8 +2149,8 @@
   .top-actions {
     top: 45px;
 
-    left: 110px;
-    right: 110px;
+    left: 68px;
+    right: 68px;
   }
 
   .center-content {
@@ -2128,7 +2189,7 @@
   .featured-column {
     top: 170px;
 
-    right: 90px;
+    right: 48px;
 
     width: 205px;
   }
@@ -2701,6 +2762,20 @@
 
   .store-wing {
     top: -1px;
+  }
+
+  /* wings ~28% smaller on mobile */
+  .store-wing-left {
+    transform:
+      rotate(14deg)
+      scale(0.68);
+  }
+
+  .store-wing-right {
+    transform:
+      scaleX(-1)
+      rotate(14deg)
+      scale(0.68);
   }
 
   .newsletter-button {
