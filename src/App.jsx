@@ -304,7 +304,7 @@ function PromotionalCard() {
     }
 
     const desktopQuery = window.matchMedia(
-      "(min-width: 1026px)",
+      "(min-width: 1101px)",
     );
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)",

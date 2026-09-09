@@ -278,17 +278,23 @@
     );
 
   right:
-    clamp(
-      38px,
-      6.3vw,
-      146px
+    calc(
+      clamp(
+        38px,
+        6.3vw,
+        146px
+      )
+      + 18px
     );
 
   left:
-    clamp(
-      38px,
-      6.3vw,
-      146px
+    calc(
+      clamp(
+        38px,
+        6.3vw,
+        146px
+      )
+      + 18px
     );
 
   display: flex;
@@ -439,7 +445,7 @@
   align-items: center;
   justify-content: center;
 
-  width: 128px;
+  width: 110px;
   height: 54px;
 
   gap: 2px;
@@ -472,7 +478,7 @@
 }
 
 .store-button-face span {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
 
   line-height: 1.05;
@@ -493,7 +499,7 @@
 }
 
 .store-wing-left {
-  left: 0;
+  left: 8px;
 
   transform:
     rotate(14deg);
@@ -510,7 +516,7 @@
 }
 
 .store-wing-right {
-  right: 0;
+  right: 8px;
 
   transform:
     scaleX(-1)
@@ -642,7 +648,7 @@
   align-items: center;
   justify-content: center;
 
-  width: 158px;
+  width: 136px;
   height: 61px;
 
   gap: 3px;
@@ -740,7 +746,7 @@
 }
 
 .newsletter-button span {
-  font-size: 10px;
+  font-size: 9px;
   font-style: italic;
   font-weight: 900;
 
@@ -1534,15 +1540,20 @@
 
 .social-button-livebarn
   .social-image {
+  width: 74%;
+  height: 74%;
+
   border-radius: 9px;
 }
 
-.social-button-livebarn
-  .social-image,
 .social-button-catchcorner
   .social-image {
-  width: 84%;
-  height: 84%;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 11px;
+
+  background: #17365c;
 }
 
 /* =========================================================
@@ -1554,9 +1565,9 @@
 
   width:
     clamp(
-      380px,
-      28vw,
-      560px
+      335px,
+      24.5vw,
+      490px
     );
 
   max-width: 100%;
@@ -1615,7 +1626,7 @@
 
   object-fit: contain;
 
-  border-radius: 75px;
+  border-radius: 12px;
 
   box-shadow:
     0 5px 11px
@@ -1684,10 +1695,13 @@
     );
 
   right:
-    clamp(
-      20px,
-      5.3vw,
-      106px
+    calc(
+      clamp(
+        20px,
+        5.3vw,
+        106px
+      )
+      - 25px
     );
 
   width:
@@ -1762,19 +1776,7 @@
     contrast(1.03)
     brightness(1.09);
 
-  border:
-    clamp(
-      0.75px,
-      0.35cqi,
-      1px
-    )
-    solid
-    rgba(
-      255,
-      255,
-      255,
-      0.68
-    );
+  border: 0;
 
   border-radius:
     clamp(
@@ -1847,7 +1849,7 @@
         0.12
       );
 
-  /* Entrance motion is desktop-only; see the 1026px+ media query below. */
+  /* Entrance motion is desktop-only; see the 1101px+ media query below. */
   animation: none;
 
   transition:
@@ -1924,7 +1926,7 @@
 }
 
 @media (
-  min-width: 1026px
+  min-width: 1101px
 ) {
   .promo-roll-edge {
     display: block;
@@ -2015,7 +2017,7 @@
    clip-path/backdrop-filter behavior that could make the card snap visible
    while only the highlight continued moving. */
 @media (
-  min-width: 1026px
+  min-width: 1101px
 ) {
   .promo-card.promo-card-unroll-prep {
     height: 0;
@@ -2596,15 +2598,15 @@
 ========================================================= */
 
 @media (
-  min-width: 1025px
+  min-width: 1101px
 ) {
   /* fluidly scale the store / newsletter buttons: ~0.68 at
-     1025px up to 1 around 1900px (box, wings and text) */
+     1101px up to 1 around 1950px (box, wings and text) */
   .top-actions {
     --btn-scale:
       clamp(
         0.68,
-        0.2875 + 0.0375vw,
+        0.2671 + 0.0375vw,
         1
       );
   }
@@ -2619,12 +2621,12 @@
   /* newsletter button matches the store button's face height,
      and sits a touch narrower */
   .newsletter-button {
-    width: 190px;
+    width: 163px;
     height: 54px;
   }
 
   .store-button-face {
-    width: 143px;
+    width: 123px;
 
     flex-direction: row;
 
@@ -2632,7 +2634,7 @@
   }
 
   .store-button-face span {
-    font-size: 12.5px;
+    font-size: 11px;
 
     font-weight: 700;
 
@@ -2641,7 +2643,7 @@
   }
 
   .newsletter-button span {
-    font-size: 12.5px;
+    font-size: 11px;
 
     font-weight: 700;
   }
@@ -2717,16 +2719,22 @@
      button mirrors it — same inset, so equal from center */
   .top-actions {
     left:
-      clamp(
-        20px,
-        5.3vw,
-        106px
+      calc(
+        clamp(
+          20px,
+          5.3vw,
+          106px
+        )
+        + 18px
       );
     right:
-      clamp(
-        20px,
-        5.3vw,
-        106px
+      calc(
+        clamp(
+          20px,
+          5.3vw,
+          106px
+        )
+        + 18px
       );
   }
 
@@ -2737,19 +2745,19 @@
   }
 
   .newsletter-button {
-    width: 218px;
+    width: 187px;
   }
 
   .store-button-face {
-    width: 164px;
+    width: 141px;
   }
 
   .store-button-face span {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .newsletter-button span {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -2835,8 +2843,8 @@
   .top-actions {
     top: 45px;
 
-    left: 68px;
-    right: 68px;
+    left: 86px;
+    right: 86px;
   }
 
   .center-content {
@@ -2882,7 +2890,7 @@
   }
 
   .livebarn-link {
-    width: 410px;
+    width: 360px;
 
     margin-top: 20px;
   }
@@ -2901,32 +2909,41 @@
 ========================================================= */
 
 @media (
-  min-width: 1025px
+  min-width: 1101px
 ) and (
   max-width: 1650px
 ) {
   .top-actions {
     left:
-      clamp(
-        120px,
-        13vw,
-        190px
+      calc(
+        clamp(
+          120px,
+          13vw,
+          190px
+        )
+        + 18px
       );
     right:
-      clamp(
-        120px,
-        13vw,
-        190px
+      calc(
+        clamp(
+          120px,
+          13vw,
+          190px
+        )
+        + 18px
       );
   }
 
   /* card tracks the newsletter button */
   .featured-column {
     right:
-      clamp(
-        100px,
-        11.5vw,
-        170px
+      calc(
+        clamp(
+          100px,
+          11.5vw,
+          170px
+        )
+        - 25px
       );
   }
 }
@@ -2936,7 +2953,7 @@
 ========================================================= */
 
 @media (
-  min-width: 1025px
+  min-width: 1101px
 ) and (
   max-width: 1400px
 ) {
@@ -2952,7 +2969,7 @@
 ========================================================= */
 
 @media (
-  min-width: 1025px
+  min-width: 1101px
 ) and (
   max-width: 1200px
 ) {
@@ -2970,7 +2987,7 @@
           4.5vw,
           56px
         )
-        + 40px
+        + 15px
       );
 
     width: 212px;
@@ -2978,11 +2995,11 @@
 }
 
 /* =========================================================
-   STACKED LAYOUT — BASE RESETS (≤1024)
+   STACKED LAYOUT — BASE RESETS (≤1100)
 ========================================================= */
 
 @media (
-  max-width: 1024px
+  max-width: 1100px
 ) {
   :root {
     --landing-height: auto;
@@ -3057,7 +3074,7 @@
   .livebarn-link {
     width:
       min(
-        410px,
+        360px,
         100%
       );
   }
@@ -3068,7 +3085,7 @@
 ========================================================= */
 
 @media (
-  max-width: 1024px
+  max-width: 1100px
 ) {
   .wings-landing {
     min-height: 0;
@@ -3127,10 +3144,13 @@
 
     padding:
       0
-      clamp(
-        14px,
-        5vw,
-        30px
+      calc(
+        clamp(
+          14px,
+          5vw,
+          30px
+        )
+        + 10px
       );
 
     margin-bottom:
@@ -3143,14 +3163,14 @@
   }
 
   .store-button-face {
-    width: 100px;
+    width: 86px;
     height: 44px;
 
     border-radius: 15px;
   }
 
   .store-button-face span {
-    font-size: 8px;
+    font-size: 7px;
   }
 
   .store-wing {
@@ -3161,11 +3181,11 @@
   }
 
   .store-wing-left {
-    left: -7px;
+    left: -2px;
   }
 
   .store-wing-right {
-    right: -7px;
+    right: -2px;
   }
 
   .store-wing i:nth-child(1) {
@@ -3181,14 +3201,14 @@
   }
 
   .newsletter-button {
-    width: 130px;
+    width: 112px;
     height: 50px;
 
     border-radius: 12px;
   }
 
   .newsletter-button span {
-    font-size: 8px;
+    font-size: 7px;
   }
 
   /* flatten center-content so the featured card can be
@@ -3284,7 +3304,7 @@
     width:
       min(
         100%,
-        440px
+        385px
       );
 
     margin-top: 18px;
@@ -3455,11 +3475,11 @@
 }
 
 /* =========================================================
-   STACKED — COMPACT FEATURED CARD (≤1024)
+   STACKED — COMPACT FEATURED CARD (≤1100)
 ========================================================= */
 
 @media (
-  max-width: 1024px
+  max-width: 1100px
 ) {
   .featured-column {
     width:
@@ -3547,20 +3567,26 @@
 @media (
   min-width: 820px
 ) and (
-  max-width: 1024px
+  max-width: 1100px
 ) {
   .top-actions {
     padding-left:
-      clamp(
-        70px,
-        13vw,
-        150px
+      calc(
+        clamp(
+          70px,
+          13vw,
+          150px
+        )
+        + 10px
       );
     padding-right:
-      clamp(
-        70px,
-        13vw,
-        150px
+      calc(
+        clamp(
+          70px,
+          13vw,
+          150px
+        )
+        + 10px
       );
   }
 }
@@ -3572,7 +3598,7 @@
 @media (
   min-width: 768px
 ) and (
-  max-width: 1024px
+  max-width: 1100px
 ) {
   /* content column sits at the top; its transparent
      bottom padding lets the background show under the banner */
@@ -3647,7 +3673,7 @@
   }
 
   .store-button-face {
-    width: 94px;
+    width: 81px;
     height: 37px;
   }
 
@@ -3670,7 +3696,7 @@
   }
 
   .newsletter-button {
-    width: 122px;
+    width: 105px;
     height: 40px;
   }
 
@@ -3752,8 +3778,8 @@
 
     width:
       min(
-        86%,
-        360px
+        76%,
+        315px
       );
   }
 
@@ -3827,11 +3853,11 @@
   }
 
   .store-button-face {
-    width: 91px;
+    width: 78px;
   }
 
   .newsletter-button {
-    width: 116px;
+    width: 100px;
   }
 
   .main-logo-wrap {
@@ -3889,16 +3915,22 @@
   /* wider side padding pulls both top buttons toward center */
   .top-actions {
     padding-left:
-      clamp(
-        40px,
-        7vw,
-        60px
+      calc(
+        clamp(
+          40px,
+          7vw,
+          60px
+        )
+        + 10px
       );
     padding-right:
-      clamp(
-        40px,
-        7vw,
-        60px
+      calc(
+        clamp(
+          40px,
+          7vw,
+          60px
+        )
+        + 10px
       );
   }
 }
