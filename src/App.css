@@ -748,10 +748,13 @@
 
 .main-tagline {
   margin:
-    clamp(
-      8px,
-      0.9vw,
-      16px
+    calc(
+      clamp(
+        8px,
+        0.9vw,
+        16px
+      )
+      * 0.65
     )
     0
     0;
@@ -760,12 +763,12 @@
 
   font-size:
     clamp(
-      17px,
-      1.35vw,
-      28px
+      15px,
+      1.2vw,
+      25px
     );
 
-  font-weight: 900;
+  font-weight: 700;
 
   line-height: 1.2;
 
@@ -788,7 +791,7 @@
 
 .center-divider {
   position: relative;
-  top: 45px;
+  top: 30px;
 
   width:
     clamp(
@@ -827,7 +830,7 @@
 
 .ice-rentals-button {
   position: relative;
-  top: 45px;
+  top: 30px;
 
   display: inline-flex;
   align-items: center;
@@ -922,7 +925,7 @@
       14px
     );
 
-  font-weight: 900;
+  font-weight: 600;
 
   line-height: 1;
 
@@ -1031,9 +1034,9 @@
 
   width:
     clamp(
-      475px,
-      35vw,
-      690px
+      380px,
+      28vw,
+      560px
     );
 
   max-width: 100%;
@@ -1045,7 +1048,7 @@
         4vw,
         76px
       )
-      - 10px
+      - 26px
     );
 
   transition:
@@ -1130,9 +1133,9 @@
 
   right:
     clamp(
-      34px,
-      5vw,
-      92px
+      56px,
+      8vw,
+      150px
     );
 
   width:
@@ -1841,7 +1844,7 @@
   }
 
   .main-tagline {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .center-divider {
@@ -1856,22 +1859,22 @@
   }
 
   .livebarn-link {
-    width: 500px;
+    width: 410px;
 
-    margin-top: 32px;
+    margin-top: 20px;
   }
 
   .featured-column {
     top: 170px;
 
-    right: 46px;
+    right: 90px;
 
     width: 205px;
   }
 }
 
 /* =========================================================
-   TABLET
+   STACKED LAYOUT — BASE RESETS (≤1024)
 ========================================================= */
 
 @media (
@@ -1931,9 +1934,8 @@
 
     padding:
       10px
-      215px
-      20px
-      0;
+      0
+      20px;
   }
 
   .main-logo-wrap {
@@ -1945,32 +1947,24 @@
   .main-tagline {
     max-width: 550px;
 
-    font-size: 20px;
-  }
-
-  .featured-column {
-    top: 154px;
-
-    right: 28px;
-
-    width: 190px;
+    font-size: 18px;
   }
 
   .livebarn-link {
     width:
       min(
-        500px,
+        410px,
         100%
       );
   }
 }
 
 /* =========================================================
-   MOBILE
+   STACKED LAYOUT (TABLET + MOBILE)
 ========================================================= */
 
 @media (
-  max-width: 767px
+  max-width: 1024px
 ) {
   .wings-landing {
     min-height: 0;
@@ -2114,13 +2108,13 @@
 
     max-width: 500px;
 
-    margin-top: 12px;
+    margin-top: 7.8px;
 
     font-size:
       clamp(
-        16px,
-        4.5vw,
-        20px
+        14px,
+        4vw,
+        18px
       );
 
     line-height: 1.35;
@@ -2174,10 +2168,10 @@
     width:
       min(
         100%,
-        510px
+        440px
       );
 
-    margin-top: 30px;
+    margin-top: 18px;
   }
 
   .featured-column {
@@ -2343,6 +2337,81 @@
 }
 
 /* =========================================================
+   STACKED — COMPACT FEATURED CARD (≤1024)
+========================================================= */
+
+@media (
+  max-width: 1024px
+) {
+  .featured-column {
+    width:
+      min(
+        100%,
+        380px
+      );
+
+    /* +29px offsets the divider's `top: 29px` shift so the
+       visual gap above the card matches the one below it
+       (19px divider margin-bottom + 34 - 29 = 24, = social gap) */
+    margin-top: 34px;
+  }
+
+  .social-section {
+    margin-top: 24px;
+  }
+
+  .promo-card {
+    max-width: 380px;
+  }
+
+  .promo-topbar {
+    height: 26px;
+  }
+
+  .promo-topbar-label {
+    font-size: 10px;
+  }
+
+  .promo-logo {
+    height: 15px;
+  }
+
+  .promo-content {
+    padding: 8px;
+  }
+
+  .promo-divider {
+    margin: 0 6px;
+  }
+
+  .promo-subdivider {
+    margin: 4px 0;
+  }
+
+  .promo-heading {
+    margin-bottom: 3px;
+
+    font-size: 11.5px;
+
+    line-height: 1.12;
+  }
+
+  .promo-button {
+    min-height: 21px;
+
+    padding:
+      4px 8px;
+
+    font-size: 8px;
+  }
+
+  .promo-button
+    + .promo-button {
+    margin-top: 5px;
+  }
+}
+
+/* =========================================================
    VERY SMALL MOBILE PROMO CARD
 ========================================================= */
 
@@ -2410,7 +2479,7 @@
   }
 
   .main-tagline {
-    font-size: 15px;
+    font-size: 13.5px;
 
     letter-spacing:
       0.105em;
