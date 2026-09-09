@@ -79,11 +79,15 @@ a {
 
 img,
 svg,
-picture,
 video {
   display: block;
 
   max-width: 100%;
+}
+
+/* wrapper only — let the inner <img> lay out as if <picture> weren't there */
+picture {
+  display: contents;
 }
 
 button,

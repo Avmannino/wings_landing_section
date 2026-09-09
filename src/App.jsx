@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 const backgroundImages = [
-  "assets/background-01.jpg",
-  "assets/background-02.jpg",
-  "assets/background-03.jpg",
+  "assets/background-01",
+  "assets/background-02",
+  "assets/background-03",
 ];
 
 const CAROUSEL_INTERVAL = 4500;
@@ -58,6 +58,7 @@ const socialLinks = [
 
 function AssetImage({
   src,
+  webpSrc = null,
   alt = "",
   className = "",
   fallback = null,
@@ -72,15 +73,32 @@ function AssetImage({
     return null;
   }
 
-  return (
+  const base = import.meta.env.BASE_URL;
+
+  const img = (
     <img
       className={className}
-      src={`${import.meta.env.BASE_URL}${src}`}
+      src={`${base}${src}`}
       alt={alt}
       onError={() => {
         setFailed(true);
       }}
     />
+  );
+
+  if (!webpSrc) {
+    return img;
+  }
+
+  return (
+    <picture>
+      <source
+        type="image/webp"
+        srcSet={`${base}${webpSrc}`}
+      />
+
+      {img}
+    </picture>
   );
 }
 
@@ -102,11 +120,29 @@ function BackgroundCarousel({
             }`}
             key={image}
           >
-            <AssetImage
-              src={image}
-              alt=""
-              className="background-image"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={`${import.meta.env.BASE_URL}${image}.webp`}
+              />
+
+              <img
+                className="background-image"
+                src={`${import.meta.env.BASE_URL}${image}.jpg`}
+                alt=""
+                loading={
+                  index === 0
+                    ? "eager"
+                    : "lazy"
+                }
+                fetchPriority={
+                  index === 0
+                    ? "high"
+                    : "low"
+                }
+                decoding="async"
+              />
+            </picture>
           </div>
         ),
       )}
@@ -202,6 +238,7 @@ function PromotionalCard() {
         <div className="promo-topbar">
           <AssetImage
             src="assets/wings-logo.png"
+            webpSrc="assets/wings-logo.webp"
             alt="Wings Arena"
             className="promo-logo"
             fallback={
@@ -366,6 +403,7 @@ function App() {
             <div className="main-logo-wrap">
               <AssetImage
                 src="assets/wings-logo.png"
+                webpSrc="assets/wings-logo.webp"
                 alt="Wings Arena"
                 className="main-logo"
                 fallback={
