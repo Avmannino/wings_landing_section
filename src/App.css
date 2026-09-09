@@ -312,7 +312,7 @@
   justify-content: center;
 
   width: 184px;
-  height: 66px;
+  height: 60px;
 
   color: #ffffff;
 
@@ -392,7 +392,7 @@
   justify-content: center;
 
   width: 128px;
-  height: 60px;
+  height: 54px;
 
   gap: 2px;
 
@@ -432,7 +432,7 @@
 .store-wing {
   position: absolute;
 
-  top: 9px;
+  top: 6px;
 
   width: 49px;
   height: 35px;
@@ -2029,10 +2029,16 @@
     top: 41px;
   }
 
-  .social-section,
-  .livebarn-link {
+  .social-section {
     position: relative;
     top: 25px;
+  }
+
+  /* banner sits 15px higher than the social section above it,
+     without shifting anything else */
+  .livebarn-link {
+    position: relative;
+    top: 10px;
   }
 }
 
@@ -2290,12 +2296,12 @@
 
   .store-button {
     width: 138px;
-    height: 52px;
+    height: 47px;
   }
 
   .store-button-face {
     width: 100px;
-    height: 49px;
+    height: 44px;
 
     border-radius: 15px;
   }
@@ -2305,7 +2311,7 @@
   }
 
   .store-wing {
-    top: 8px;
+    top: 5px;
 
     width: 36px;
     height: 28px;
@@ -2699,6 +2705,12 @@
     height: 43px;
   }
 
+  .main-logo-wrap {
+    width: 178px;
+
+    min-height: 178px;
+  }
+
   .main-tagline {
     margin-top: 2px;
   }
@@ -2724,17 +2736,35 @@
   /* everything below the tagline sits 10px lower; the
      featured card keeps its place in the stack */
   .center-divider {
-    top: 39px;
+    /* ~30px lands it equidistant between the button above
+       and the card below (gap ≈ 25px each side) */
+    top: 30px;
   }
 
   .ice-rentals-button {
     top: 25px;
   }
 
-  .social-section,
+  /* pull the card back up toward the divider */
+  .featured-column {
+    top: 3px;
+  }
+
+  /* social block rides higher — further above the banner */
+  .social-section {
+    position: relative;
+    top: 2px;
+  }
+
   .livebarn-link {
     position: relative;
-    top: 10px;
+    top: 3px;
+
+    width:
+      min(
+        86%,
+        360px
+      );
   }
 }
 
