@@ -3707,6 +3707,9 @@
   }
 
   .main-tagline {
+    position: relative;
+    top: -5px;
+
     margin-top: 2px;
   }
 
@@ -3730,7 +3733,7 @@
 
   /* keep Schedule + ICE RENTALS side by side, like desktop */
   .cta-row {
-    top: 25px;
+    top: 17px;
 
     width:
       min(
@@ -3763,13 +3766,13 @@
 
   /* pull the card back up toward the divider */
   .featured-column {
-    top: 3px;
+    top: -6px;
   }
 
   /* social block rides higher — further above the banner */
   .social-section {
     position: relative;
-    top: 2px;
+    top: 0px;
   }
 
   .livebarn-link {
