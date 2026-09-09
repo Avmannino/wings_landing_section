@@ -478,7 +478,7 @@
 }
 
 .store-button-face span {
-  font-size: 9px;
+  font-size: 11px;
   font-style: italic;
   font-weight: 900;
 
@@ -747,7 +747,7 @@
 }
 
 .newsletter-button span {
-  font-size: 9px;
+  font-size: 10px;
   font-style: italic;
   font-weight: 900;
 
@@ -1754,16 +1754,16 @@
   background:
     radial-gradient(
       120% 82% at 10% -8%,
-      rgba(255, 255, 255, 0.48) 0%,
-      rgba(255, 255, 255, 0.14) 48%,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.06) 48%,
       rgba(255, 255, 255, 0) 70%
     ),
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.34) 0%,
-      rgba(239, 247, 253, 0.22) 38%,
-      rgba(218, 234, 246, 0.16) 67%,
-      rgba(255, 255, 255, 0.26) 100%
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(239, 247, 253, 0.09) 38%,
+      rgba(218, 234, 246, 0.06) 67%,
+      rgba(255, 255, 255, 0.1) 100%
     );
 
   backdrop-filter:
@@ -2673,7 +2673,7 @@
   }
 
   .store-button-face span {
-    font-size: 11px;
+    font-size: 13px;
 
     font-weight: 700;
 
@@ -2682,7 +2682,7 @@
   }
 
   .newsletter-button span {
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 700;
   }
@@ -2792,11 +2792,11 @@
   }
 
   .store-button-face span {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .newsletter-button span {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 
@@ -3209,7 +3209,7 @@
   }
 
   .store-button-face span {
-    font-size: 7px;
+    font-size: 9px;
   }
 
   .store-wing {
@@ -3247,7 +3247,7 @@
   }
 
   .newsletter-button span {
-    font-size: 7px;
+    font-size: 8px;
   }
 
   /* flatten center-content so the featured card can be

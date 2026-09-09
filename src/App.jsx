@@ -237,7 +237,6 @@ function StoreButton() {
       </span>
 
       <span className="store-button-face">
-        <span>WINGS</span>
         <span>STORE</span>
       </span>
 
@@ -262,7 +261,7 @@ function NewsletterButton() {
       href="http://eepurl.com/jpMhqI"
       target="_top"
     >
-      <span>WINGS</span>
+      <span>OUR</span>
       <span>NEWSLETTER</span>
     </a>
   );
