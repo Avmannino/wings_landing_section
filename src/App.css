@@ -298,6 +298,21 @@
 .top-action-left,
 .top-action-right {
   pointer-events: auto;
+
+  /* one knob scales the whole button — box, wings and text.
+     --btn-scale defaults to 1; set fluidly per breakpoint. */
+  transform:
+    scale(var(--btn-scale, 1));
+}
+
+.top-action-left {
+  transform-origin:
+    left top;
+}
+
+.top-action-right {
+  transform-origin:
+    right top;
 }
 
 /* =========================================================
@@ -1716,13 +1731,13 @@
 }
 
 .promo-subdivider {
-  height: 1.5px;
+  height: 2px;
 
   margin:
     clamp(
-      6px,
-      3cqi,
-      10px
+      12px,
+      5cqi,
+      16px
     )
     0;
 
@@ -1733,7 +1748,7 @@
       7,
       52,
       92,
-      0.35
+      0.5
     );
 }
 
@@ -1856,6 +1871,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  text-align: center;
 
   padding:
     clamp(
@@ -2017,6 +2034,17 @@
 @media (
   min-width: 1025px
 ) {
+  /* fluidly scale the store / newsletter buttons: ~0.68 at
+     1025px up to 1 around 1900px (box, wings and text) */
+  .top-actions {
+    --btn-scale:
+      clamp(
+        0.68,
+        0.2875 + 0.0375vw,
+        1
+      );
+  }
+
   /* card is vertical (right rail) here — match the store /
      newsletter buttons to its width */
   .store-button,
@@ -2081,6 +2109,23 @@
 
   .featured-column {
     width: 235px;
+  }
+
+  /* newsletter button lines up over the card, and the store
+     button mirrors it — same inset, so equal from center */
+  .top-actions {
+    left:
+      clamp(
+        20px,
+        5.3vw,
+        106px
+      );
+    right:
+      clamp(
+        20px,
+        5.3vw,
+        106px
+      );
   }
 
   /* keep the buttons matched to the wider card */
@@ -2192,6 +2237,86 @@
     right: 48px;
 
     width: 205px;
+  }
+}
+
+/* =========================================================
+   NARROWER DESKTOP — PULL TOP BUTTONS TOWARD CENTER
+========================================================= */
+
+@media (
+  min-width: 1025px
+) and (
+  max-width: 1650px
+) {
+  .top-actions {
+    left:
+      clamp(
+        120px,
+        13vw,
+        190px
+      );
+    right:
+      clamp(
+        120px,
+        13vw,
+        190px
+      );
+  }
+
+  /* card tracks the newsletter button */
+  .featured-column {
+    right:
+      clamp(
+        100px,
+        11.5vw,
+        170px
+      );
+  }
+}
+
+/* =========================================================
+   MID DESKTOP — DROP THE LIVEBARN BANNER
+========================================================= */
+
+@media (
+  min-width: 1025px
+) and (
+  max-width: 1420px
+) {
+  /* +30px below the social links; nothing else moves */
+  .livebarn-link {
+    top: 40px;
+  }
+}
+
+/* =========================================================
+   TIGHT DESKTOP — KEEP THE CARD CLEAR OF THE COPY
+========================================================= */
+
+@media (
+  min-width: 1025px
+) and (
+  max-width: 1200px
+) {
+  /* narrow the centered column so the trimmed card fits
+     beside it without overlapping */
+  .center-content {
+    width: 470px;
+  }
+
+  .featured-column {
+    right:
+      calc(
+        clamp(
+          28px,
+          4.5vw,
+          56px
+        )
+        + 50px
+      );
+
+    width: 180px;
   }
 }
 
@@ -2736,12 +2861,91 @@
 }
 
 /* =========================================================
+   WIDER TABLET — PULL TOP BUTTONS TOWARD CENTER
+========================================================= */
+
+@media (
+  min-width: 820px
+) and (
+  max-width: 1024px
+) {
+  .top-actions {
+    padding-left:
+      clamp(
+        70px,
+        13vw,
+        150px
+      );
+    padding-right:
+      clamp(
+        70px,
+        13vw,
+        150px
+      );
+  }
+}
+
+/* =========================================================
+   TABLET — LIFT THE FEATURED CARD
+========================================================= */
+
+@media (
+  min-width: 768px
+) and (
+  max-width: 1024px
+) {
+  /* content column sits at the top; its transparent
+     bottom padding lets the background show under the banner */
+  .wings-landing {
+    min-height: 760px;
+  }
+
+  .landing-layout {
+    min-height: 0;
+
+    padding-top: 16px;
+    padding-bottom:
+      clamp(
+        90px,
+        14vw,
+        150px
+      );
+  }
+
+  /* pull the whole column up under the (unmoved) top buttons */
+  .top-actions {
+    margin-bottom: 12px;
+  }
+
+  /* card sits a bit higher; relative offset, nothing else moves */
+  .featured-column {
+    top: -2px;
+  }
+
+  /* re-center the divider between the button and the card */
+  .center-divider {
+    top: 22px;
+  }
+}
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
 @media (
   max-width: 767px
 ) {
+  /* transparent bottom padding = background image visible
+     below the banner */
+  .landing-layout {
+    padding-bottom:
+      clamp(
+        54px,
+        15vw,
+        95px
+      );
+  }
+
   /* nudge the buttons down 10px, and pull the rest of the column
      up 22px (28px stacked margin - 6) without moving the buttons */
   .top-actions {
@@ -2897,8 +3101,13 @@
   .landing-layout {
     padding:
       17px
-      14px
-      24px;
+      14px;
+    padding-bottom:
+      clamp(
+        48px,
+        15vw,
+        90px
+      );
   }
 
   .top-actions {
