@@ -2061,7 +2061,9 @@
   }
 
   .store-button-face span {
-    font-size: 14px;
+    font-size: 12.5px;
+
+    font-weight: 700;
 
     letter-spacing:
       0.09em;
@@ -2069,6 +2071,8 @@
 
   .newsletter-button span {
     font-size: 12.5px;
+
+    font-weight: 700;
   }
 
   /* everything below the tagline sits lower; the featured
@@ -2139,7 +2143,7 @@
   }
 
   .store-button-face span {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .newsletter-button span {
