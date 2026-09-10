@@ -312,10 +312,12 @@ function PromotionalCard() {
       return undefined;
     }
 
-    // Measure the card at its natural size, then collapse it before the
-    // browser paints. Animating the actual height avoids Chrome's
-    // backdrop-filter + clip-path snap and creates a true top-to-bottom
-    // unrolling motion.
+    // Measure the card at its natural size, then hand that height to a
+    // keyframe animation that unrolls it from 0. A @keyframes animation
+    // (vs a height transition) replays the same way on every mount and
+    // every refresh — it doesn't hinge on the browser painting an
+    // intermediate collapsed frame first, which is what made the
+    // transition version skip on reload.
     const fullHeight = card.scrollHeight;
 
     // Bail rather than risk leaving the card collapsed if we somehow
@@ -329,61 +331,53 @@ function PromotionalCard() {
       `${fullHeight}px`,
     );
     card.classList.add(
-      "promo-card-unroll-prep",
+      "promo-card-unroll",
     );
 
-    // Force a synchronous layout with height:0 so the transition has a
-    // real starting point. Without this, a fast (minified) bundle can
-    // batch the collapse and the expand into one style pass and the card
-    // just snaps open with no animation.
-    void card.offsetHeight;
-
     let fallbackTimer = 0;
-
-    const frame = window.requestAnimationFrame(() => {
-      card.classList.add(
-        "promo-card-unroll-active",
-      );
-    });
 
     const finishUnroll = (event) => {
       if (
         event &&
         (event.target !== card ||
-          event.propertyName !== "height")
+          event.animationName !==
+            "promo-card-unroll")
       ) {
         return;
       }
 
+      // Swap the fixed measured height for `auto` so the card can still
+      // reflow (late webfont, resize) after the entrance.
       card.classList.add(
         "promo-card-unroll-complete",
+      );
+      card.classList.remove(
+        "promo-card-unroll",
       );
       window.clearTimeout(fallbackTimer);
     };
 
     card.addEventListener(
-      "transitionend",
+      "animationend",
       finishUnroll,
     );
 
-    // Safety net if transitionend never lands (interrupted, tab hidden).
+    // Safety net if animationend never lands (tab hidden mid-run, etc).
     fallbackTimer = window.setTimeout(
       finishUnroll,
-      1200,
+      1400,
     );
 
     return () => {
-      window.cancelAnimationFrame(frame);
       window.clearTimeout(fallbackTimer);
 
       card.removeEventListener(
-        "transitionend",
+        "animationend",
         finishUnroll,
       );
 
       card.classList.remove(
-        "promo-card-unroll-prep",
-        "promo-card-unroll-active",
+        "promo-card-unroll",
         "promo-card-unroll-complete",
       );
       card.style.removeProperty(
