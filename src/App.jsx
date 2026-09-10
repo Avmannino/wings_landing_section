@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 
@@ -289,109 +289,12 @@ function SocialButton({
 }
 
 function PromotionalCard() {
-  const cardRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const card = cardRef.current;
-
-    if (!card) {
-      return undefined;
-    }
-
-    const desktopQuery = window.matchMedia(
-      "(min-width: 1101px)",
-    );
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-
-    if (
-      !desktopQuery.matches ||
-      reducedMotionQuery.matches
-    ) {
-      return undefined;
-    }
-
-    // Measure the card at its natural size, then hand that height to a
-    // keyframe animation that unrolls it from 0. A @keyframes animation
-    // (vs a height transition) replays the same way on every mount and
-    // every refresh — it doesn't hinge on the browser painting an
-    // intermediate collapsed frame first, which is what made the
-    // transition version skip on reload.
-    const fullHeight = card.scrollHeight;
-
-    // Bail rather than risk leaving the card collapsed if we somehow
-    // can't get a real measurement.
-    if (!fullHeight || fullHeight < 80) {
-      return undefined;
-    }
-
-    card.style.setProperty(
-      "--promo-unroll-height",
-      `${fullHeight}px`,
-    );
-    card.classList.add(
-      "promo-card-unroll",
-    );
-
-    let fallbackTimer = 0;
-
-    const finishUnroll = (event) => {
-      if (
-        event &&
-        (event.target !== card ||
-          event.animationName !==
-            "promo-card-unroll")
-      ) {
-        return;
-      }
-
-      // Swap the fixed measured height for `auto` so the card can still
-      // reflow (late webfont, resize) after the entrance.
-      card.classList.add(
-        "promo-card-unroll-complete",
-      );
-      card.classList.remove(
-        "promo-card-unroll",
-      );
-      window.clearTimeout(fallbackTimer);
-    };
-
-    card.addEventListener(
-      "animationend",
-      finishUnroll,
-    );
-
-    // Safety net if animationend never lands (tab hidden mid-run, etc).
-    fallbackTimer = window.setTimeout(
-      finishUnroll,
-      1400,
-    );
-
-    return () => {
-      window.clearTimeout(fallbackTimer);
-
-      card.removeEventListener(
-        "animationend",
-        finishUnroll,
-      );
-
-      card.classList.remove(
-        "promo-card-unroll",
-        "promo-card-unroll-complete",
-      );
-      card.style.removeProperty(
-        "--promo-unroll-height",
-      );
-    };
-  }, []);
-
+  // The desktop unroll entrance is pure CSS (see `promo-card-unroll` in
+  // App.css) so it replays on every refresh, just like the other
+  // entrance animations.
   return (
     <main className="promo-page">
-      <article
-        ref={cardRef}
-        className="promo-card"
-      >
+      <article className="promo-card">
         <div className="promo-topbar">
           <PumpkinIcon />
 

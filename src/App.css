@@ -2045,65 +2045,71 @@
    DESKTOP PROMO CARD — TRUE SCROLL UNROLL
 ========================================================= */
 
-/* The card is collapsed before first paint by useLayoutEffect, then a
-   keyframe animation expands it to its measured height. A @keyframes
-   animation (not a transition) replays deterministically on every mount
-   / refresh — it doesn't depend on the browser painting an intermediate
-   height:0 frame first. */
+/* Pure-CSS unroll: the card sits at its natural height and a clip-path
+   inset (percentage-based, so no JS measurement) wipes it in from the
+   top. Same mechanism as every other entrance animation on the page —
+   it replays identically on first load and on every refresh. */
+/* Negative side/end insets so the finished state clips nothing (the drop
+   shadow keeps showing); `overflow:hidden` + border-radius keep the card
+   corners rounded throughout, so no `round` is needed here. */
 @keyframes promo-card-unroll {
   from {
-    height: 0;
+    clip-path:
+      inset(0 -140px 100% -140px);
   }
 
   to {
-    height:
-      var(--promo-unroll-height, 100%);
+    clip-path:
+      inset(-140px -140px -140px -140px);
+  }
+}
+
+@keyframes promo-roll-edge-ride {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+
+  84% {
+    opacity: 1;
+  }
+
+  to {
+    top: 100%;
+    opacity: 0;
   }
 }
 
 @media (
   min-width: 1101px
 ) {
-  .promo-card.promo-card-unroll {
-    height: 0;
-
-    overflow: hidden;
-
+  .promo-card {
     animation:
       promo-card-unroll
-        560ms
+        640ms
         cubic-bezier(
-          0.33,
+          0.4,
           0,
-          0.2,
+          0.15,
           1
         )
-        80ms
+        60ms
         both;
-
-    will-change: height;
   }
 
-  .promo-card.promo-card-unroll-complete {
-    height: auto;
-
-    overflow: hidden;
-
-    will-change: auto;
-  }
-
-  /* This is the rolled front of the "scroll." Because it is anchored to
-     the card's bottom edge, it travels naturally with the expanding card
-     instead of animating independently across an already-visible panel. */
+  /* The rolled front of the "scroll" — rides the clip edge down the card
+     on the same curve, then fades. */
   .promo-roll-edge {
     position: absolute;
     z-index: 4;
 
     right: 0;
-    bottom: 0;
     left: 0;
+    top: 0;
 
     height: 12px;
+
+    margin-top: -6px;
 
     pointer-events: none;
 
@@ -2127,20 +2133,18 @@
           36,
           0.12
         );
-  }
 
-  .promo-card-unroll
-    .promo-roll-edge {
-    opacity: 1;
-  }
-
-  .promo-card-unroll-complete
-    .promo-roll-edge {
-    opacity: 0;
-
-    transition:
-      opacity
-        160ms ease-out;
+    animation:
+      promo-roll-edge-ride
+        640ms
+        cubic-bezier(
+          0.4,
+          0,
+          0.15,
+          1
+        )
+        60ms
+        both;
   }
 }
 
