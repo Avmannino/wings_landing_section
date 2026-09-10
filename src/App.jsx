@@ -258,7 +258,6 @@ function NewsletterButton() {
       href="http://eepurl.com/jpMhqI"
       target="_top"
     >
-      <span>OUR</span>
       <span>NEWSLETTER</span>
     </a>
   );
@@ -445,6 +444,30 @@ function PromotionalCard() {
               Registration &amp; Info
             </a>
           </div>
+        </div>
+
+        <div className="promo-footer">
+          <a
+            className="promo-footer-link"
+            href="http://eepurl.com/jpMhqI"
+            target="_top"
+            rel="noopener noreferrer"
+          >
+            <span className="promo-footer-text">
+              Subscribe to Wings Weekly
+            </span>
+          </a>
+
+          <a
+            className="promo-footer-link promo-footer-merch"
+            href="https://shop.gearupwithus.com/wings-arena"
+            target="_top"
+            rel="noopener noreferrer"
+          >
+            <span className="promo-footer-text">
+              Wings Merch
+            </span>
+          </a>
         </div>
 
         <span
@@ -637,6 +660,10 @@ function App() {
           </div>
 
           <aside className="featured-column">
+            <div className="featured-store">
+              <StoreButton />
+            </div>
+
             <PromotionalCard />
           </aside>
         </div>
