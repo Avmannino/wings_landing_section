@@ -318,6 +318,12 @@ function PromotionalCard() {
     // unrolling motion.
     const fullHeight = card.scrollHeight;
 
+    // Bail rather than risk leaving the card collapsed if we somehow
+    // can't get a real measurement.
+    if (!fullHeight || fullHeight < 80) {
+      return undefined;
+    }
+
     card.style.setProperty(
       "--promo-unroll-height",
       `${fullHeight}px`,
@@ -326,22 +332,25 @@ function PromotionalCard() {
       "promo-card-unroll-prep",
     );
 
-    let secondFrame = 0;
+    // Force a synchronous layout with height:0 so the transition has a
+    // real starting point. Without this, a fast (minified) bundle can
+    // batch the collapse and the expand into one style pass and the card
+    // just snaps open with no animation.
+    void card.offsetHeight;
 
-    const firstFrame =
-      window.requestAnimationFrame(() => {
-        secondFrame =
-          window.requestAnimationFrame(() => {
-            card.classList.add(
-              "promo-card-unroll-active",
-            );
-          });
-      });
+    let fallbackTimer = 0;
+
+    const frame = window.requestAnimationFrame(() => {
+      card.classList.add(
+        "promo-card-unroll-active",
+      );
+    });
 
     const finishUnroll = (event) => {
       if (
-        event.target !== card ||
-        event.propertyName !== "height"
+        event &&
+        (event.target !== card ||
+          event.propertyName !== "height")
       ) {
         return;
       }
@@ -349,6 +358,7 @@ function PromotionalCard() {
       card.classList.add(
         "promo-card-unroll-complete",
       );
+      window.clearTimeout(fallbackTimer);
     };
 
     card.addEventListener(
@@ -356,13 +366,28 @@ function PromotionalCard() {
       finishUnroll,
     );
 
+    // Safety net if transitionend never lands (interrupted, tab hidden).
+    fallbackTimer = window.setTimeout(
+      finishUnroll,
+      1200,
+    );
+
     return () => {
-      window.cancelAnimationFrame(firstFrame);
-      window.cancelAnimationFrame(secondFrame);
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(fallbackTimer);
 
       card.removeEventListener(
         "transitionend",
         finishUnroll,
+      );
+
+      card.classList.remove(
+        "promo-card-unroll-prep",
+        "promo-card-unroll-active",
+        "promo-card-unroll-complete",
+      );
+      card.style.removeProperty(
+        "--promo-unroll-height",
       );
     };
   }, []);
