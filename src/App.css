@@ -2340,28 +2340,6 @@
     );
 }
 
-.promo-subdivider {
-  height: 2px;
-
-  margin:
-    clamp(
-      12px,
-      5cqi,
-      16px
-    )
-    0;
-
-  border-radius: 1px;
-
-  background:
-    rgba(
-      7,
-      52,
-      92,
-      0.5
-    );
-}
-
 .promo-program-alt
   .promo-button {
   background: #073b65;
@@ -2391,6 +2369,29 @@
       31,
       62,
       0.35
+    );
+}
+
+/* Adult Hockey Classes section — compact heading, taller button */
+.promo-program-alt
+  .promo-heading {
+  font-size:
+    clamp(
+      13.5px,
+      6.5cqi,
+      19px
+    );
+
+  line-height: 1.44;
+}
+
+.promo-program-alt
+  .promo-button {
+  min-height:
+    clamp(
+      36px,
+      14cqi,
+      46px
     );
 }
 
@@ -3433,16 +3434,6 @@
     justify-content: center;
   }
 
-  .promo-subdivider {
-    margin:
-      clamp(
-        4px,
-        1.846cqi,
-        8px
-      )
-      0;
-  }
-
   .promo-divider {
     width:
       clamp(
@@ -3590,10 +3581,6 @@
     margin: 0 6px;
   }
 
-  .promo-subdivider {
-    margin: 4px 0;
-  }
-
   .promo-heading {
     margin-bottom: 3px;
 
@@ -3611,6 +3598,10 @@
   /* taller Learn to Play / Learn to Skate buttons */
   .promo-program:first-child .promo-button {
     min-height: 28px;
+  }
+
+  .promo-program-alt .promo-button {
+    min-height: 34px;
   }
 
   .promo-button {
