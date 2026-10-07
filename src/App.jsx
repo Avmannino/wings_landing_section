@@ -476,6 +476,76 @@ function App() {
           }
         />
 
+        <img
+          className="landing-cobweb landing-cobweb-left"
+          src={`${import.meta.env.BASE_URL}assets/top-left-web.png`}
+          alt=""
+          aria-hidden="true"
+        />
+
+        {/* little spider sliding down its thread from the top-left web */}
+        <div
+          className="web-spider"
+          aria-hidden="true"
+        >
+          <div className="web-spider-drop">
+            <svg
+              className="web-spider-body"
+              viewBox="0 0 100 56"
+            >
+              <g
+                fill="none"
+                stroke="#111111"
+                strokeWidth="3.4"
+                strokeLinecap="round"
+                strokeLinejoin="miter"
+              >
+                <polyline points="30 16 22 8 7 12" />
+                <polyline points="29 24 14 17 6 30" />
+                <polyline points="29 32 17 29 9 44" />
+                <polyline points="33 42 24 40 30 53" />
+                <polyline points="70 16 78 8 93 12" />
+                <polyline points="71 24 86 17 94 30" />
+                <polyline points="71 32 83 29 91 44" />
+                <polyline points="67 42 76 40 70 53" />
+              </g>
+
+              <ellipse cx="50" cy="29" rx="21" ry="22" fill="#111111" />
+
+              <ellipse cx="41.5" cy="37" rx="8" ry="8.6" fill="#ffffff" />
+              <ellipse cx="58.5" cy="37" rx="8" ry="8.6" fill="#ffffff" />
+              <circle cx="44.5" cy="38" r="2.3" fill="#111111" />
+              <circle cx="55.5" cy="38" r="2.3" fill="#111111" />
+            </svg>
+          </div>
+        </div>
+
+        <img
+          className="landing-cobweb landing-cobweb-right"
+          src={`${import.meta.env.BASE_URL}assets/top-right-web.png`}
+          alt=""
+          aria-hidden="true"
+        />
+
+        {/* pixel bats (adapted from codepen.io/timothyguo/pen/jbarzP)
+            fly across once on load */}
+        <div
+          className="landing-bats"
+          aria-hidden="true"
+        >
+          <span className="bat-flyer bat-flyer-ltr bat-flyer-1">
+            <span className="bat-sprite" />
+          </span>
+
+          <span className="bat-flyer bat-flyer-2">
+            <span className="bat-sprite" />
+          </span>
+
+          <span className="bat-flyer bat-flyer-ltr bat-flyer-3">
+            <span className="bat-sprite" />
+          </span>
+        </div>
+
         <div className="landing-layout">
           <div className="top-actions">
             <div className="top-action-left">
