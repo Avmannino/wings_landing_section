@@ -107,12 +107,15 @@
 }
 
 .web-spider-drop {
-  position: relative;
+  position: absolute;
+  top: var(--spider-drop);
+  left: 0;
 
   width: var(--spider-size);
 
-  transform: translateY(var(--spider-drop));
-
+  /* keyframes use plain values only (no var()) so mobile Safari/WebKit
+     animates them reliably: drop animates `top` up from -70px to the
+     resting value above; bob animates margin-top. */
   animation:
     spider-drop
       2.4s
@@ -183,22 +186,17 @@
 
 @keyframes spider-drop {
   from {
-    transform: translateY(calc(var(--spider-size) * -1.2));
-  }
-
-  to {
-    transform: translateY(var(--spider-drop));
+    top: -70px;
   }
 }
 
 @keyframes spider-bob {
   from {
-    transform: translateY(var(--spider-drop));
+    margin-top: 0;
   }
 
   to {
-    transform:
-      translateY(calc(var(--spider-drop) - 12px));
+    margin-top: -12px;
   }
 }
 
@@ -263,10 +261,10 @@
   transform: scaleX(-1);
 }
 
+/* 7 frames: steps(7) toward 116.67% lands frame k on k/6 * 100% */
 @keyframes bat-flap {
   to {
-    background-position:
-      calc(var(--bat-size) * -7) 0;
+    background-position: 116.6667% 0;
   }
 }
 
