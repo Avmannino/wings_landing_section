@@ -72,12 +72,8 @@
       1vw,
       18px
     );
-  bottom:
-    clamp(
-      4px,
-      0.8vw,
-      14px
-    );
+  /* feet rest on the page's bottom edge */
+  bottom: 0;
 
   width:
     clamp(
