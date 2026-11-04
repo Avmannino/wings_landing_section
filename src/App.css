@@ -48,6 +48,495 @@
   background: transparent;
 }
 
+/* =========================================================
+   THANKSGIVING TURKEY — bottom-left corner. Pure-CSS drawing
+   adapted from Alvaro Montoro (dev.to/alvaromontoro/drawing-a-
+   thanksgiving-turkey-with-css-5e8m). The original's vmin units
+   are converted to cqi (its 80vmin box → 100cqi, so ×1.25) so the
+   whole bird scales off its own width at every breakpoint.
+   Sits above the background but below the content layer, so it
+   never covers a button or link.
+========================================================= */
+
+.turkey {
+  --turkey-brown1: #775533;
+  --turkey-brown2: #997755;
+  --turkey-orange1: orange;
+  --turkey-orange2: darkorange;
+
+  position: absolute;
+  z-index: 5;
+  left:
+    clamp(
+      4px,
+      1vw,
+      18px
+    );
+  bottom:
+    clamp(
+      4px,
+      0.8vw,
+      14px
+    );
+
+  width:
+    clamp(
+      110px,
+      10vw,
+      190px
+    );
+  aspect-ratio: 1;
+
+  container-type: inline-size;
+
+  /* the hero sets white text; the eye's second-eye box-shadow and the
+     body's leg shadows rely on currentColor */
+  color: #000000;
+
+  pointer-events: none;
+  user-select: none;
+
+  /* gentle side-to-side waddle, pivoting on the feet */
+  transform-origin: 50% 100%;
+
+  animation:
+    turkey-waddle
+      2.8s
+      ease-in-out
+      infinite
+      alternate;
+}
+
+.turkey div {
+  position: absolute;
+
+  box-sizing: border-box;
+}
+
+/* groups span the full drawing box so their children's % positions
+   match the original */
+.turkey-tail,
+.turkey-head-group {
+  inset: 0;
+}
+
+/* tail fan puffs up and settles, pivoting at the fan's base */
+.turkey-tail {
+  transform-origin: 50% 70%;
+
+  animation:
+    turkey-tail-puff
+      3.4s
+      ease-in-out
+      infinite
+      alternate;
+}
+
+.turkey-feather {
+  top: 30%;
+  left: 50%;
+
+  width: 10%;
+  height: 40%;
+
+  background: var(--turkey-orange1);
+  border-radius: 100% / 30% 30% 170% 170%;
+
+  transform-origin: 50% 100%;
+  transform: translate(-50%, 0);
+}
+
+.turkey-feather:nth-child(even) {
+  background: var(--turkey-orange2);
+}
+
+.turkey-feather:nth-child(2) { transform: translate(-50%, 0) rotate(17deg); }
+.turkey-feather:nth-child(3) { transform: translate(-50%, 0) rotate(34deg); }
+.turkey-feather:nth-child(4) { transform: translate(-50%, 0) rotate(51deg); }
+.turkey-feather:nth-child(5) { transform: translate(-50%, 0) rotate(68deg); }
+.turkey-feather:nth-child(6) { transform: translate(-50%, 0) rotate(85deg); }
+.turkey-feather:nth-child(7) { transform: translate(-50%, 0) rotate(102deg); }
+.turkey-feather:nth-child(8) { transform: translate(-50%, 0) rotate(-17deg); }
+.turkey-feather:nth-child(9) { transform: translate(-50%, 0) rotate(-34deg); }
+.turkey-feather:nth-child(10) { transform: translate(-50%, 0) rotate(-51deg); }
+.turkey-feather:nth-child(11) { transform: translate(-50%, 0) rotate(-68deg); }
+.turkey-feather:nth-child(12) { transform: translate(-50%, 0) rotate(-85deg); }
+.turkey-feather:nth-child(13) { transform: translate(-50%, 0) rotate(-102deg); }
+
+.turkey-leg {
+  top: 79%;
+  left: 50%;
+
+  width: 3%;
+  height: 21%;
+
+  background: var(--turkey-orange1);
+  background-image:
+    repeating-linear-gradient(
+      transparent 0 10%,
+      rgba(0, 0, 0, 0.1) 0 11%
+    );
+  border-radius: 6.25cqi / 50%;
+
+  transform: translate(-50%, 0) translate(-5cqi, 0);
+}
+
+.turkey-leg + .turkey-leg {
+  transform: translate(-50%, 0) translate(5cqi, 0);
+}
+
+/* toes */
+.turkey-leg::before,
+.turkey-leg::after {
+  content: "";
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  display: block;
+
+  width: 80%;
+  height: 35%;
+
+  background: var(--turkey-orange1);
+  border-radius: 6.25cqi;
+
+  transform-origin: 50% 0;
+  transform: translate(-50%, 0) rotate(30deg);
+}
+
+.turkey-leg::after {
+  transform: translate(-50%, 0) rotate(-30deg);
+}
+
+.turkey-body {
+  top: 40%;
+  left: 50%;
+
+  width: 40%;
+  height: 40%;
+
+  color: var(--turkey-brown1);
+  background: var(--turkey-brown1);
+  border-radius: 50%;
+
+  transform: translate(-50%, 0);
+
+  /* thighs */
+  box-shadow:
+    -5cqi 18.125cqi 0 -16.25cqi,
+    5cqi 18.125cqi 0 -16.25cqi;
+}
+
+.turkey-wing {
+  top: 41%;
+  left: 23%;
+
+  width: 20%;
+  height: 30%;
+
+  background: var(--turkey-brown2);
+  border-radius: 100% 0% 100% 5%;
+
+  transform-origin: top right;
+  transform: rotate(-10deg);
+}
+
+.turkey-wing + .turkey-wing {
+  right: 43%;
+  left: auto;
+
+  transform: scaleX(-1) rotate(-10deg);
+}
+
+/* head + hat nod together: an occasional little "gobble" */
+.turkey-head-group {
+  transform-origin: 50% 48%;
+
+  animation:
+    turkey-gobble
+      4.2s
+      ease-in-out
+      infinite;
+}
+
+.turkey-hat-top {
+  top: 0;
+  left: 50%;
+
+  width: 16%;
+  height: 20%;
+
+  background: #000000;
+  border-radius: 100% / 230% 230% 0% 0%;
+  box-shadow: inset 0 -8.75cqi rgba(255, 255, 255, 0.2);
+
+  transform: translate(-50%, 0);
+}
+
+/* hat band buckle — content-box to match the original, which had no
+   global border-box reset */
+.turkey-hat-top::before {
+  content: "";
+
+  position: absolute;
+  bottom: 4.0625cqi;
+  left: 50%;
+
+  display: block;
+  box-sizing: content-box;
+
+  width: 40%;
+  height: 2.5cqi;
+
+  border: 1.25cqi solid #777722;
+  border-radius: 1.25cqi;
+
+  transform: translate(-50%, 0);
+}
+
+.turkey-hat-bottom {
+  top: 15%;
+  left: 50%;
+
+  width: 35%;
+  height: 8%;
+
+  background: #000000;
+  border-radius: 50%;
+
+  transform: translate(-50%, 0);
+}
+
+.turkey-head {
+  top: 15%;
+  left: 50%;
+
+  width: 19%;
+  height: 19%;
+
+  background: var(--turkey-brown2);
+  border-radius: 50%;
+
+  transform: translate(-50%, 0);
+
+  clip-path: polygon(0% 20%, 100% 20%, 100% 500%, 0% 500%);
+}
+
+/* neck */
+.turkey-head::before {
+  content: "";
+
+  position: absolute;
+  top: 80%;
+  left: 50%;
+
+  display: block;
+
+  width: 40%;
+  height: 120%;
+
+  background: var(--turkey-brown2);
+  border-radius: 0 0 100% 100% / 30%;
+
+  transform: translate(-50%, 0);
+}
+
+/* one element + its box-shadow = both eyes, so one scaleY blinks both */
+.turkey-eye {
+  top: 45%;
+  left: 50%;
+
+  width: 10%;
+  height: 10%;
+
+  background: #000000;
+  border-radius: 50%;
+  box-shadow: 6.25cqi 0 #000000;
+
+  transform: translate(-50%, 0) translate(-3.125cqi, 0);
+
+  animation:
+    turkey-blink
+      4.6s
+      infinite;
+}
+
+.turkey-beak {
+  top: 60%;
+  left: 50%;
+
+  width: 5cqi;
+  height: 3.75cqi;
+
+  border-top: 1.875cqi solid transparent;
+  border-bottom: 1.875cqi solid transparent;
+  border-left: 5cqi solid var(--turkey-orange1);
+}
+
+.turkey-wattle {
+  top: 60%;
+  left: 50%;
+
+  width: 3.125cqi;
+  height: 7.5cqi;
+
+  background: #dd0000;
+  border-radius: 100% / 100% 0 100% 100%;
+
+  transform: translate(-100%, 0);
+}
+
+/* plain values only in the keyframes (no var()) so WebKit animates them
+   reliably. Individual rotate/scale properties compose with each part's
+   existing `transform`, so the drawing's own positioning is untouched. */
+@keyframes turkey-waddle {
+  from {
+    rotate: -1.5deg;
+  }
+
+  to {
+    rotate: 1.5deg;
+  }
+}
+
+@keyframes turkey-tail-puff {
+  from {
+    scale: 1;
+    rotate: -1.5deg;
+  }
+
+  to {
+    scale: 1.06;
+    rotate: 1.5deg;
+  }
+}
+
+@keyframes turkey-gobble {
+  0%,
+  60%,
+  100% {
+    rotate: 0deg;
+  }
+
+  68% {
+    rotate: -7deg;
+  }
+
+  76% {
+    rotate: 5deg;
+  }
+
+  84% {
+    rotate: -3deg;
+  }
+
+  92% {
+    rotate: 1deg;
+  }
+}
+
+@keyframes turkey-blink {
+  0%,
+  92%,
+  100% {
+    scale: 1 1;
+  }
+
+  96% {
+    scale: 1 0.1;
+  }
+}
+
+@media (
+  max-width: 1100px
+) {
+  .turkey {
+    width:
+      clamp(
+        84px,
+        15vw,
+        124px
+      );
+  }
+}
+
+@media (
+  max-width: 767px
+) {
+  .turkey {
+    width:
+      clamp(
+        70px,
+        13vw,
+        100px
+      );
+  }
+}
+
+@media (
+  max-width: 480px
+) {
+  .turkey {
+    width:
+      clamp(
+        56px,
+        15.5vw,
+        76px
+      );
+  }
+}
+
+/* nudge in from the left edge on desktop */
+@media (
+  min-width: 1101px
+) {
+  .turkey {
+    left:
+      calc(
+        clamp(
+          4px,
+          1vw,
+          18px
+        )
+        + 200px
+      );
+  }
+}
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .turkey,
+  .turkey-tail,
+  .turkey-head-group,
+  .turkey-eye {
+    animation: none;
+  }
+}
+
+/* Autumn-leaf strip along the top edge, below the content layer. The art
+   is drawn for a bottom edge, so it's flipped to hang the leaves down. */
+.fall-leaves {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  top: 0;
+  transform: scaleY(-1);
+  height:
+    clamp(
+      28px,
+      3vw,
+      42px
+    );
+  pointer-events: none;
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: auto 100%;
+}
+
 .wings-landing {
   position: relative;
   isolation: isolate;

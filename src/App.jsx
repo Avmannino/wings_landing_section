@@ -401,6 +401,64 @@ function PromotionalCard() {
   );
 }
 
+const TURKEY_FEATHERS = Array.from(
+  { length: 13 },
+  (_, index) => index,
+);
+
+// Thanksgiving turkey, bottom-left of the hero. Pure-CSS drawing adapted
+// from Alvaro Montoro (dev.to/alvaromontoro/drawing-a-thanksgiving-
+// turkey-with-css-5e8m). The tail fan and the head + hat are wrapped in
+// groups so each can be animated as one unit.
+function ThanksgivingTurkey() {
+  return (
+    <div
+      className="turkey"
+      aria-hidden="true"
+    >
+      <div className="turkey-tail">
+        {TURKEY_FEATHERS.map((feather) => (
+          <div
+            key={feather}
+            className="turkey-feather"
+          />
+        ))}
+      </div>
+
+      <div className="turkey-leg" />
+      <div className="turkey-leg" />
+      <div className="turkey-body" />
+      <div className="turkey-wing" />
+      <div className="turkey-wing" />
+
+      <div className="turkey-head-group">
+        <div className="turkey-hat-top" />
+        <div className="turkey-hat-bottom" />
+
+        <div className="turkey-head">
+          <div className="turkey-eye" />
+          <div className="turkey-beak" />
+          <div className="turkey-wattle" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Autumn-leaf strip along the top edge. The art is a short tile, so it's
+// laid down as a repeating background rather than an <img>.
+function FallLeavesBorder() {
+  return (
+    <div
+      className="fall-leaves"
+      aria-hidden="true"
+      style={{
+        backgroundImage: `url("${import.meta.env.BASE_URL}assets/fall-leaves-border.webp")`,
+      }}
+    />
+  );
+}
+
 function App() {
   const [
     activeBackground,
@@ -475,6 +533,10 @@ function App() {
             loadedSlides
           }
         />
+
+        <FallLeavesBorder />
+
+        <ThanksgivingTurkey />
 
         <div className="landing-layout">
           <div className="top-actions">

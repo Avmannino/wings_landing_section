@@ -39,6 +39,10 @@ const pngs = [
   { name: "catchcorner", width: 160, palette: true },
 ];
 
+// Repeating edge strips — the source has empty transparent headroom above
+// the art, so `top` crops down to the first row that has any pixels.
+const strips = [{ name: "fall-leaves-border", top: 58 }];
+
 async function run() {
   await mkdir(OUT, { recursive: true });
 
@@ -94,6 +98,29 @@ async function run() {
       .toFile(join(OUT, `${name}.webp`));
 
     console.log(`✓ ${name} → .png + .webp @ ${width}w`);
+  }
+
+  for (const { name, top } of strips) {
+    const input = join(RAW, `${name}.png`);
+    const { width, height } = await sharp(input).metadata();
+    const src = sharp(input).extract({
+      left: 0,
+      top,
+      width,
+      height: height - top,
+    });
+
+    await src
+      .clone()
+      .png({ compressionLevel: 9 })
+      .toFile(join(OUT, `${name}.png`));
+
+    await src
+      .clone()
+      .webp({ quality: 82 })
+      .toFile(join(OUT, `${name}.webp`));
+
+    console.log(`✓ ${name} → .png + .webp @ ${width}x${height - top}`);
   }
 }
 
